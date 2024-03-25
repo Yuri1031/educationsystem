@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('id');
             $table->string('title');
             $table->timestamp('posted_date');
-            $table->limit('article_contents');
+            $table->text('article_contents');
             $table->timestamps();
         });
     }
