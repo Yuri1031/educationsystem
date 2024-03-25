@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('grades', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id');
             $table->string('name', 255);
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('grades');
-        
+
     }
 };
