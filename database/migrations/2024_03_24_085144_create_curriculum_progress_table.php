@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('curriculum_progress', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('curriculum_id')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->tinyInteger('clear_flg')->nullable();
+            $table->unsignedBigInteger('curriculum_id');
+            $table->unsignedBigInteger('user_id');
+            $table->tinyInteger('clear_flg');
             $table->timestamps();   
             
             $table->foreign('curriculum_id')->references('id')->on('curriculums');

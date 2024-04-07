@@ -16,12 +16,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255)->nullable();
-            $table->string('name_kana',255)->nullable();
-            $table->string('email',255)->nullable();
-            $table->string('password',255)->nullable();
-            $table->string('profile_image',255);
-            $table->integer('grade_id')->nullable()->references('id')->on('curriculum');
+            $table->string('name',255);
+            $table->string('name_kana',255);
+            $table->string('email',255);
+            $table->string('password',255);
+            $table->string('profile_image',255)->nullable();
+            $table->integer('grade_id')->references('id')->on('curriculum');
             $table->timestamps();
         });
     }
