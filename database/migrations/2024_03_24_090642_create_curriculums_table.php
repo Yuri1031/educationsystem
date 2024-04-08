@@ -20,11 +20,9 @@ return new class extends Migration
             $table->longText('description');
             $table->mediumText('video_url');
             $table->tinyInteger('alway_delivery_flg')->default(0);
-            $table->unsignedBigInteger('grade_id');
+            $table->Integer('grade_id');
             $table->timestamps();
 
-            // Foreign key constraint
-            $table->foreign('grade_id')->references('id')->on('grades');
         });
     }
 
