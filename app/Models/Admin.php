@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\ResetPasswordNotification;            //追記
+use App\Notifications\ResetPasswordNotification;
 
 class Admin extends User
 {
@@ -26,9 +26,9 @@ class Admin extends User
         'email_verified_at' => 'datetime',
     ];
     
-    public function sendPasswordResetNotification($token)       //追記
-    {                                                           //追記
-        $url = url("admin/password/reset/$token");              //追記
-        $this->notify(new ResetPasswordNotification($url));     //追記
-    }                                                           //追記
+    public function sendPasswordResetNotification($token)
+    {
+        $url = url("admin/password/reset/$token");
+        $this->notify(new ResetPasswordNotification($url));
+    }
 }

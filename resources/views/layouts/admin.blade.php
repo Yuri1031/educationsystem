@@ -37,28 +37,25 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('admin/login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('admin/register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('admin/logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ url('admin/logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.login') }}">{{ __('ログイン') }}</a></li>
+                                @endif
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.register') }}">{{ __('新規登録') }}</a></li>
+                                @else
+                                <li class="nav-item"
+                                    ><a class="nav-link">{{ Auth::user()->name }}</a></li>
+                                    
+                                <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.logout') }}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">{{ __('ログアウト') }}</a>
+
+                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                                </li>
                         @endguest
                     </ul>
                 </div>

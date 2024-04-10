@@ -1,37 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\admin;                       //修正
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;                        //追記
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    // use AuthenticatesUsers;                              //削除
-    use AuthenticatesUsers {                                //追記
-        logout as performLogout;                            //追記
-    }                                                       //追記
+    use AuthenticatesUsers {
+        logout as performLogout;
+    }
 
-    protected $redirectTo = '/admin/home';                  //修正
-
+    protected $redirectTo = '/admin/top';
 
     public function __construct()
     {
-        $this->middleware('guest:admin')->except('logout'); //修正
+        $this->middleware('guest:admin')->except('logout');
     }
 
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
 
-    protected function guard()                              //追記
-    {                                                       //追記
-        return Auth::guard('admin');                        //追記
-    }                                                       //追記
-
-
-    public function logout(Request $request)                //追記
-    {                                                       //追記
-        $this->performLogout($request);                     //追記
-        return redirect('admin/login');                     //追記
-    }                                                       //追記
+    public function logout(Request $request)
+    {
+        $this->performLogout($request);
+        return redirect('admin/login'); // リダイレクト先
+    }
 }
