@@ -1,0 +1,7 @@
+body,h1,h2,h3,h4,h5,p,a,ul,li,dd,dt{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #333;
+  list-style: none;
+}

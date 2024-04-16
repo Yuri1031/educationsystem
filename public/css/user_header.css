@@ -4,17 +4,17 @@
   justify-content: space-between;
 }
 
-ul {
+.header ul {
   padding: 30px 0;
   margin: 0 30px;
   display: flex;
 }
 
-ul li {
+.header ul li {
   list-style: none;
 }
 
-ul li a{
+.header ul li a{
   padding: 5px 10px;
   background-color: #149397;
   text-decoration: none;
@@ -23,7 +23,7 @@ ul li a{
   border-radius: 5px;
 }
 
-.status li a {
+.header .status li a {
   background-color: #F16B4A;
   color: black;
 }
