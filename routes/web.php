@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\AdminTopController;
+use App\Http\Controllers\Admin\TopController;
+use App\Http\Controllers\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,10 @@ Route::post('/admin/logout', [App\Http\Controllers\admin\LoginController::class,
 Route::view('/admin/register', 'admin/register');
 Route::post('/admin/register', [App\Http\Controllers\admin\RegisterController::class, 'register'])->name('admin.register');
 Route::view('/admin/top', 'admin/top')->middleware('auth:admin');
-Route::get('/admin/top', [AdminTopController::class, 'show'])->name('admin.top');
+Route::get('/admin/top', [TopController::class, 'show'])->name('admin.top');
+
+//バナー
+Route::get('/admin/class_list', [BannerController::class, 'index'])->name('admin.class_list');
 
 //パスワードリセット
 Route::view('/admin/password/reset', 'admin/passwords/email');

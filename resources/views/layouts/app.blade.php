@@ -49,11 +49,11 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('admin.login')) <!-- 追加 -->
-                                <li class="nav-item"> <!-- 追加 -->
-                                    <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Admin') }}</a> <!-- 追加 -->
-                                </li> <!-- 追加 -->
-                            @endif <!-- 追加 -->
+                            @if (Route::has('admin.login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Admin') }}</a>
+                                </li>
+                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -37,25 +37,30 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                                @if (Route::has('login'))
+                            @if (Route::has('admin.login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.login') }}">{{ __('ログイン') }}</a></li>
-                                @endif
+                                    <a class="nav-link" href="{{ route('admin.login') }}">{{ __('ログイン') }}</a>
+                                </li>
+                            @endif
+                            @if (Route::has('admin.register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.register') }}">{{ __('新規登録') }}</a></li>
-                                @else
-                                <li class="nav-item"
-                                    ><a class="nav-link">{{ Auth::user()->name }}</a></li>
-                                    
-                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.register') }}">{{ __('新規登録') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link">{{ Auth::user()->name }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">{{ __('ログアウト') }}</a>
-
-                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('ログアウト') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
-                                </li>
+                            </li>
                         @endguest
                     </ul>
                 </div>

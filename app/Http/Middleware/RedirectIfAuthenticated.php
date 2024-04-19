@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
                 return redirect('admin/top');
             }
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                return redirect(RouteServiceProvider::TOP);
             }
         }
         return $next($request);
