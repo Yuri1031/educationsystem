@@ -14,7 +14,7 @@
             <ul>
                 <li><a href="{{ route('timetable') }}">時間割</a></li>
                 <li><a href="{{ route('curriculum_progress') }}">授業進捗</a></li>
-                <li><a href="{{ route('profile.setting') }}">プロフィール設定</a></li>
+                <li><a href="{{ route('profile.update.show') }}">プロフィール設定</a></li>
             </ul>
             <ul class="status">
                 <!-- if文でログインかログアウト状態かで表示を変える -->
