@@ -8,13 +8,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PasswordUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     // 授業進捗ページへ推移
     public function curriculum_progress() {
         // ログインしているユーザーの情報を取得するように変更
-        $user = User::find(1);
+        $user = Auth::user();
 
         $curriculums = Curriculum::all();
         $grades = Grade::all();
@@ -40,7 +41,7 @@ class UserController extends Controller
 
     // プロフィール設定ページへ推移
     public function profile_update_show() {
-        $user = User::find(1);
+        $user = Auth::user();
         return view('profile_update')->with([
             'user' => $user,
         ]);
@@ -48,7 +49,7 @@ class UserController extends Controller
 
     // プロフィール設定（変更）
     public function profile_update(ProfileUpdateRequest $request) {
-        $user = User::find(1);
+        $user = Auth::user();
         $file = $request->file('profile_image');
 
         DB::beginTransaction();
@@ -76,7 +77,7 @@ class UserController extends Controller
     // パスワード変更ページへ推移
     public function password_update_show() {
         // ログインしているユーザーの情報を取得するように変更
-        $user = User::find(1);
+        $user = Auth::user();
 
         return view('password_update')->with([
             'user' => $user,
@@ -85,7 +86,7 @@ class UserController extends Controller
 
     // パスワード変更
     public function password_update(PasswordUpdateRequest $request) {
-        $user = User::find(1);
+        $user = Auth::user();
 
         DB::beginTransaction();
         try {
