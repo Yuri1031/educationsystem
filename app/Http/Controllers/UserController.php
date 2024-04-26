@@ -64,12 +64,12 @@ class UserController extends Controller
                 $file_name = $uer->profile_image;
             }
             $user->updataProfile($request, $user, $file_name);
-            DB::commit();
         } catch (Exception $e) {
             return redirect()->route('profile.update.show')->with('message', '変更に失敗しました。');
             DB::rollBack();
         }
-
+        
+        DB::commit();
         return redirect()->route('profile.update.show')->with('message', 'プロフィールを更新しました。');
     }
 
