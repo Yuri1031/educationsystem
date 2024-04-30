@@ -15,12 +15,6 @@ class TopController extends Controller
 
     public function show()
     {
-        $user = Auth::guard('admin')->user();
-        
-        $username = $user->name;
-        $email = $user->email;
-        
-        return view('admin.top', compact('username', 'email'));
+        return view('admin.top');
     }
-
 }

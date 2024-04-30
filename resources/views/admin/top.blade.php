@@ -7,8 +7,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="mx-2">
-                        <p>ユーザーネーム：{{ $username }}</p>
-                        <p>メールアドレス：{{ $email }}</p>
+                        <p>ユーザーネーム：{{ Auth::user()->name }}</p>
+                        <p>メールアドレス：{{ Auth::user()->email }}</p>
                     </div>
                 </div>
             </div>

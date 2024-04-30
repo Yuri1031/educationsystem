@@ -14,16 +14,22 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="{{ asset('js/class_list.js') }}"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
 </head>
 <body>
     <div class="header">
+        @if(Auth::check())
         <ul>
             <li><a href="">授業管理</a></li>
             <li><a href="">お知らせ管理</a></li>
-            <li><a href="">バナー管理</a></li>
+            <li><a href="{{ route('admin.class_list') }}">バナー管理</a></li>
         </ul>
+        @endif
+    <div class="ms-auto">
         <ul class="status">
         <!-- ログアウト時の表示 -->
         @guest
@@ -39,7 +45,7 @@
             @endif
         @endguest
         <!-- ログイン時の表示 -->
-        @auth
+        @if(Auth::check())
             <li>
                 <a>{{ Auth::user()->name }}</a>
             </li>
@@ -54,8 +60,9 @@
                 @csrf
             </form>
             </li>
-        @endauth
+        @endif
         </ul>
+    </div>
     </div>
     
     <!-- コンテンツの間にスペースを追加 -->
