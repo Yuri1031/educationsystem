@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Banner;
 
 use Illuminate\Http\Request;
+use App\Models\Articles;
 
-class TopController extends Controller
+class ArticlesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,7 @@ class TopController extends Controller
      */
     public function index()
     {
-        return view('top');
-    }
-
-    //bannerコントローラがあれば bannersindex を index に移動？？
-    public function bannersindex()
-    {
-        $banners = Banner::all();
-        return view('top', ['banners' => $banners]);
+        //
     }
 
     /**
@@ -53,7 +46,8 @@ class TopController extends Controller
      */
     public function show($id)
     {
-        //
+        $articles = Articles::find($id);
+        return view('top',['article' => $article]);
     }
 
     /**

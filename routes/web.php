@@ -20,4 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/top', [App\Http\Controllers\TopController::class, 'index'])->name('top');
+Route::get('/top.banners', [App\Http\Controllers\TopController::class, 'bannersindex'])->name('top.banners');
