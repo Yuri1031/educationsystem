@@ -25,18 +25,21 @@ class ArticleUpdateRequest extends FormRequest
     {
         return [
             'posted_date' => 'required',
-            'title' => 'required|max:30',
-            'article_contents' => 'required',
+            'title' => ['required', 'max:255', 'regex:/^[^!@#$%^&*()\-_=+[\]{};:\'"<>?`~]+$/'],
+            'article_contents' => ['required', 'regex:/^[^!#$%^&*()\-_=+[\]{};:\'"<>?`~]+$/'],
         ];
     }
 
     public function messages()
     {
         return [
-            'posted_date.required' => '投稿日を選択してください',
-            'title.required' => 'タイトルを入力してください',
-            'article_contents.required' => '本文を入力してください',
+            'posted_date.required' => '投稿日時は入力必須項目です',
+            'title.required' => 'タイトルは入力必須項目です',
+            'title.max' => 'タイトルは２５５文字未満で入力してください',
+            'title.regex' => 'タイトルを正しく入力してください',
+            'article_contents.required' => '本文は入力必須項目です',
             'article_contents.max' => '30文字以内で入力してください。',
+            'article_contents.regex' => '本文を正しく入力してください',
         ];
     }
 }

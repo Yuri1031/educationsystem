@@ -29,6 +29,13 @@ class ArticleController extends Controller
         ]);
     }
 
+    // お知らせ登録ページへ推移
+    public function article_regist_show() 
+    {
+        //
+    }
+
+
     // お知らせ変更
     public function notice_update(ArticleUpdateRequest $request, $id) 
     {
@@ -64,7 +71,7 @@ class ArticleController extends Controller
         }
 
         DB::commit();
-        return redirect()->route('notice')->with('message', '削除しました');
+        return response()->json([$article]);
     }
 }
 

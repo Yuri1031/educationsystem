@@ -14,10 +14,11 @@
     <div class="messageBox">
         <p>{{ session('message') }}</p>
       </div>
-    <form action="{{ route('notice.update', $article->id) }}">
+    <form action="{{ route('notice.update',  ['id' => $article->id]) }}" method="POST">
+      @csrf
       <dl>
         <dd>投稿日時</dd>
-        <dt><input type="date" value="{{ $article->posted_date }}" name="posted_date"></dt>
+        <dt><input type="date" name="posted_date"></dt>
         <div class="errorBox">
           @error('posted_date')
             <span class="errorText">{{ $message }}</span>

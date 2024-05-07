@@ -7,14 +7,22 @@ table tr th {
   width: 230px;
 }
 
+.registBtn {
+  display: block;
+  background-color: #149397;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 7px;
+}
+
 .btn {
   width: 70px;
   text-align: center;
+  transition: 0.5s;
 }
 
 .btn a {
   display: block;
-  transition: 0.3s;
   padding: 5px 0;
   border-radius: 7px;
   color: white;
@@ -38,10 +46,9 @@ table tr th {
   border-radius: 7px;
   color: white;
   cursor: pointer;
-  transition: 0.5s;
 }
 
-.btn a:hover, .deleteBtn:hover{
+.btn:hover, .deleteBtn:hover{
   opacity: 0.6;
 }
 
