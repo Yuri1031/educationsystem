@@ -19,7 +19,7 @@ class BannerController extends Controller
     {
         try {
             $banners = Banner::all();
-            return view('admin.class_list', compact('banners'));
+            return view('admin.banner', compact('banners'));
         } catch (\Exception $e) {
             return back()->with('error', 'Failed to load banners: ' . $e->getMessage());
         }
@@ -27,7 +27,7 @@ class BannerController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.class_list');
+        return view('admin.banner');
     }
 
     public function store(Request $request)
@@ -37,22 +37,25 @@ class BannerController extends Controller
                 'image.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
     
-            $image = $request->file('image');
-            $file_name = now()->format('YmdHis') . '_' . $image->getClientOriginalName();
-            $dir = 'images';
+            if($request->hasfile('image'))
+            {
+                foreach($request->file('image') as $key => $image)
+                {
+                    $name = now()->format('YmdHis') . '_' . $key . '_' . $image->getClientOriginalName();
+                    $image->storeAs('public/images', $name);
     
-            $image->storeAs('public/' . $dir, $file_name);
+                    $banner = new Banner;
+                    $banner->image = $name;
+                    $banner->save();
+                }
+            }
     
-            $banner = new Banner;
-            $banner->image = $file_name;
-            $banner->save();
-    
-            return redirect('admin/class_list')->with('success', 'Image uploaded successfully.');
+            return redirect('admin/banner')->with('success', 'Image uploaded successfully.');
         } catch (\Exception $e) {
             return back()->with('error', 'Failed to upload image: ' . $e->getMessage());
         }
     }
-    
+
     public function update(Request $request, $id)
     {
         try {
@@ -64,7 +67,7 @@ class BannerController extends Controller
     
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $imageName = now()->format('YmdHis') . '_' . $image->getClientOriginalName();
+                $imageName = now()->format('YmdHis') . '_' . $key . '_' . $image->getClientOriginalName();
                 $dir = 'images';
     
                 if ($banner->image) {
@@ -80,7 +83,7 @@ class BannerController extends Controller
     
             $banner->save();
     
-            return redirect('admin/class_list')->with('success', 'Image updated successfully.');
+            return redirect('admin/banner')->with('success', 'Image updated successfully.');
         } catch (\Exception $e) {
             return back()->with('error', 'Failed to update image: ' . $e->getMessage());
         }
@@ -98,7 +101,7 @@ class BannerController extends Controller
             
             $banner->delete();
             
-            return redirect()->route('admin.class_list')->with('success', '画像を削除しました。');
+            return redirect()->route('admin.banner')->with('success', '画像を削除しました。');
         } catch (\Exception $e) {
             return back()->with('error', '画像の削除に失敗しました: ' . $e->getMessage());
         }

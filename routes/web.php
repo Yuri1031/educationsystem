@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\TopController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\RegisterController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\User\CurriculumsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,12 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// ユーザー
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/curriculums', [CurriculumsController::class, 'index'])->name('user.curriculums');
+    Route::get('/curriculum/{id}', [CurriculumController::class, 'show'])->name('user.curriculum.show');
+});
+
 // 管理者用ルート
 Route::prefix('admin')->name('admin.')->group(function () {
     // ゲスト状態
@@ -42,9 +49,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('banners', 'BannerController');
         Route::put('admin/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
         Route::delete('admin/banner/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
-
-        // Route::get('/class_list', [BannerController::class, 'index'])->name('class_list');
-        // Route::post('/upload', [BannerController::class, 'store'])->name('banners.store');
+        Route::get('/banner', [BannerController::class, 'index'])->name('banner');
+        Route::post('/upload', [BannerController::class, 'store'])->name('banners.store');
     
         // パスワードリセット
         Route::view('/admin/password/reset', 'admin/passwords/email');
@@ -53,7 +59,3 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/admin/password/reset', [App\Http\Controllers\admin\ResetPasswordController::class, 'reset']);
     });
 });
-
-// バナー
-Route::get('/admin/class_list', [BannerController::class, 'index'])->name('admin.class_list');
-Route::post('/admin/upload', [BannerController::class, 'store'])->name('banners.store');

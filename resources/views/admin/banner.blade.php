@@ -39,26 +39,47 @@
         </td>
     </tr>
     @endforeach
-    <tr>
-        <td><div id="view_1"></div></td>
-        <td>
-        <form action="{{ route('banners.store') }}" method="post" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" name="banner_id" value="">
-            <input type="file" id="file_1" name="image">
-        </td>
-        <td></td>
-    </tr>
     </tbody>
     <tfoot>
-    <tr>
-        <td><button id="add" type="button" class="btn btn-info rounded-circle p-0" style="width:2rem;height:2rem;">+</button></td>
-        <td><input type="submit" name="send" value="登録"></td>
-        </form>
-    </tr>
     </tfoot>
 </table>
-<span id="message"></span>
+
+<!-- 新規登録  -->
+<form action="{{ route('admin.banners.store') }}" method="post" enctype="multipart/form-data">
+    @csrf
+    <table class="table table-borderless align-middle">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="preView">
+            <tr>
+                <td><div id="view_1"></div></td>
+                <td>
+                    <div class="container mt-5">
+                    <div class="input-group mb-3">
+                        <input type="file" id="file_1" name="image[]" class="form-control">
+                        <button class="btn btn-outline-secondary add-image-btn" type="button">+</button>
+                    </div>
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td><input type="submit" class="btn btn-primary" name="send" value="登録"></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <span id="message"></span>
+</form>
+
 
 </div>
 </div>
