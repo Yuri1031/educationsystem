@@ -19,6 +19,8 @@ return new class extends Migration
             $table->dateTime('delivery_from');
             $table->dateTime('delivery_to');
             $table->timestamps();
+
+            $table->foreign('curriculums_id')->references('id')->on('curriculums');
         });
     }
 
@@ -32,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('delivery_times');
     }
 };
+

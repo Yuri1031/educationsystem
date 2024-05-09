@@ -21,5 +21,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//トップ画面
 Route::get('/top', [App\Http\Controllers\TopController::class, 'index'])->name('top');
 Route::get('/top.banners', [App\Http\Controllers\TopController::class, 'bannersindex'])->name('top.banners');
+
+//受講画面
+Route::get('/curriculums/{id}', [CurriculumController::class, 'show'])->name('curriculums.show');
