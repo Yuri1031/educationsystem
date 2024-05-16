@@ -28,7 +28,7 @@
           <tr>
             <td>{{ date('20y年m月d日', strtotime($article->posted_date)) }}</td>
             <td>{{ $article->title }}</td>
-            <td class="btn"><a href="{{ route('notice.update.show', $article->id) }}" class="showBtn">編集</a></td>
+            <td class="btn"><a href="{{ route('admin.notice.update.show', $article->id) }}" class="showBtn">編集</a></td>
             <td class="btn">
               <form method="POST" action="{{ route('notice.delete', ['id' => $article->id]) }}" class="deleteForm">
                 @method('DELETE')

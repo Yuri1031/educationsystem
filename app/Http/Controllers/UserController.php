@@ -12,28 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    // 授業進捗ページへ推移
-    public function curriculum_progress() {
-        // ログインしているユーザーの情報を取得するように変更
-        // $user = Auth::user();
-        $user = User::find(1);
-
-        $curriculums = Curriculum::all();
-        $grades = Grade::all();
-
-        $curriculumsByGrade = [];
-
-        foreach ($grades as $grade) {
-            $curriculumsByGrade[$grade->name] = Curriculum::where('grade_id', $grade->id)->get();
-        }
-
-        return view('curriculum_progress')
-        ->with([
-            'user' => $user,
-            'curriculums' => $curriculums,
-            'curriculumsByGrade' => $curriculumsByGrade,
-        ]);
-    }
+    // ログインページへ推移
+    public function user_login(){
+        //
+    } 
 
     // ユーザーページへ推移
     public function user_show() {
@@ -42,75 +24,105 @@ class UserController extends Controller
 
     // プロフィール設定ページへ推移
     public function profile_update_show() {
-        // $user = Auth::user();
-        $user = User::find(1);
-        return view('profile_update')->with([
-            'user' => $user,
-        ]);
+        //テスト用
+        $user = User::find(2);
+        Auth::login($user);
+
+        // ここから本コード
+        $user = Auth::user();
+
+        if($user === null){
+            return view('userLogin');
+        }else {
+            return view('user_profile_update')->with([
+                'user' => $user,
+            ]);
+        }
     }
 
     // プロフィール設定（変更）
     public function profile_update(ProfileUpdateRequest $request) {
-        // $user = Auth::user();
-        $user = User::find(1);
-        $file = $request->file('profile_image');
+        //テスト用
+        $user = User::find(2);
+        Auth::login($user);
 
-        DB::beginTransaction();
-        try {
-            if($file !== null){
-                $file_name = 'storage/sample/' . $request->file('profile_image')->getClientOriginalName();
+        // ここから本コード
+        $user = Auth::user();
 
-                $request->file('profile_image')->storeAs('public/sample', $request->file('profile_image')->getClientOriginalName());
+        if($user === null){
+            return view('userLogin');
+        }else {
+            $file = $request->file('profile_image');
 
-                \Illuminate\Support\Facades\File::delete($user->profile_image);
-            }else{
-                // 画像が選択されていなかったら同じ画像で処理を実行
-                $file_name = $uer->profile_image;
+            DB::beginTransaction();
+            try {
+                if($file !== null){
+                    $file_name = 'storage/sample/' . $request->file('profile_image')->getClientOriginalName();
+
+                    $request->file('profile_image')->storeAs('public/sample', $request->file('profile_image')->getClientOriginalName());
+
+                    \Illuminate\Support\Facades\File::delete($user->profile_image);
+                }else{
+                    // 画像が選択されていなかったら同じ画像で処理を実行
+                    $file_name = $user->profile_image;
+                }
+                $user->updataProfile($request, $user, $file_name);
+            } catch (Exception $e) {
+                return redirect()->route('profile.update.show')->with('message', '変更に失敗しました。');
+                DB::rollBack();
             }
-            $user->updataProfile($request, $user, $file_name);
-        } catch (Exception $e) {
-            return redirect()->route('profile.update.show')->with('message', '変更に失敗しました。');
-            DB::rollBack();
+            
+            DB::commit();
+            return redirect()->route('profile.update.show')->with('message', 'プロフィールを更新しました。');
         }
-        
-        DB::commit();
-        return redirect()->route('profile.update.show')->with('message', 'プロフィールを更新しました。');
     }
 
     // パスワード変更ページへ推移
     public function password_update_show() {
-        // ログインしているユーザーの情報を取得するように変更
-        // $user = Auth::user();
-        $user = User::find(1);
+        //テスト用
+        $user = User::find(2);
+        Auth::login($user);
 
-        return view('password_update')->with([
-            'user' => $user,
-        ]);
+        // ここから本コード        
+        $user = Auth::user();
+
+        if($user === null){
+            return view('userLogin');
+        }else {
+            return view('user_password_update')->with([
+                'user' => $user,
+            ]);
+        }
+        
     }
 
     // パスワード変更
     public function password_update(PasswordUpdateRequest $request) {
-        // $user = Auth::user();
-        $user = User::find(1);
+        //テスト用
+        $user = User::find(2);
+        Auth::login($user);
 
-        DB::beginTransaction();
-        try {
-            if($user->password === $request->old_password){
-                //更新処理
-                $user->updataPassword($request, $user);
-            
-                DB::commit();
-            }else{
-                dd($user);
-    
+        // ここから本コード
+        $user = Auth::user();
+
+        if($user === null){
+            return view('userLogin');
+        }else {
+            DB::beginTransaction();
+            try {
+                if($user->password === $request->old_password){
+                    //更新処理
+                    $user->updataPassword($request, $user);
+                
+                    DB::commit();
+                    return redirect()->route('password.update.show')->with('message', 'パスワードを変更しました');
+                }else{
+                    return redirect()->route('password.update.show')->with('message', '旧パスワードでと同じパスワードは使用できません。');
+                }
+            } catch (Exception $e) {
+                return redirect()->route('password.update.show')->with('message', '変更に失敗しました。');
+                DB::rollBack();
             }
-        } catch (Exception $e) {
-            return redirect()->route('password.update.show')->with('message', '変更に失敗しました。');
-            DB::rollBack();
         }
-
-        return redirect()->route('password.update.show')->with('message', 'パスワードを変更しました');
-        
     }
-    
 }

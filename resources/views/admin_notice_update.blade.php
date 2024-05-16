@@ -10,11 +10,11 @@
 <body>
   @include('admin_header') <!-- 共通ヘッダーをインクルード -->
   <div class="container">
-    <a href="{{ route('notice') }}">←戻る</a>
+    <a href="{{ route('admin.notice') }}">←戻る</a>
     <div class="messageBox">
         <p>{{ session('message') }}</p>
       </div>
-    <form action="{{ route('notice.update',  ['id' => $article->id]) }}" method="POST">
+    <form action="{{ route('admin.notice.update',  ['id' => $article->id]) }}" method="POST">
       @csrf
       <dl>
         <dd>投稿日時</dd>

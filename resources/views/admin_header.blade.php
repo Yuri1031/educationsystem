@@ -13,18 +13,14 @@
         @yield('content')
         <div class="header">
             <ul>
-                <li><a href="">授業管理</a></li>
-                <li><a href="">お知らせ管理</a></li>
-                <li><a href="">バナー管理</a></li>
+                <li><a href="{{ route('curriculum.management') }}">授業管理</a></li>
+                <li><a href="{{ route('admin.notice') }}">お知らせ管理</a></li>
+                <li><a href="{{ route('banner.management') }}">バナー管理</a></li>
             </ul>
             <ul class="status">
                 <!-- if文でログインかログアウト状態かで表示を変える -->
-                <li><a href="">ログイン</a></li>
-                <li>/</li>
-                <li><a href="">ログアウト</a></li>
+                <li><a href="{{ route('admin.login') }}">ログアウト</a></li>
             </ul>
-            
-            
         </div>
     </body>
 </html>

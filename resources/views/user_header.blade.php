@@ -17,10 +17,7 @@
                 <li><a href="{{ route('profile.update.show') }}">プロフィール設定</a></li>
             </ul>
             <ul class="status">
-                <!-- if文でログインかログアウト状態かで表示を変える -->
-                <li><a href="">ログイン</a></li>
-                <li>/</li>
-                <li><a href="">ログアウト</a></li>
+                <li><a href="{{ route('user.login') }}">ログアウト</a></li>
             </ul>
 
         </div>

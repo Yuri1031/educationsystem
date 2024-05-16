@@ -8,16 +8,20 @@ use App\Models\Curriculum;
 class CurriculumController extends Controller
 {
     // 授業の詳細ページへ推移
-    public function curriculum_show($id) {
-        $curriculum = Curriculum::find($id);
-        
-        return view('// 授業ページのファイル名',[
-            'curriculum' => $curriculum,
-        ]);
+    public function curriculum_show() 
+    {
+        //
     }
 
     // 時間割ページへ推移
-    public function timetable() {
+    public function timetable() 
+    {
+        //
+    }
+
+    // 授業管理ページへ推移
+    public function curriculum_management() 
+    {
         //
     }
 
