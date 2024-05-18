@@ -13,14 +13,14 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     // ユーザーお知らせページへ推移
-    public function user_notice() {
+    public function user_notice($id) {
         //テスト用
         $user = User::find(2);
         Auth::login($user);
         
         // ここから本コード
         $user = Auth::user();
-        $article = Article::find(1);
+        $article = Article::find($id);
 
         if($user === null){
             return view('userLogin');
@@ -59,7 +59,27 @@ class ArticleController extends Controller
     // 管理お知らせ登録ページへ推移
     public function article_regist_show() 
     {
-        //
+        $article = null;
+
+        return view('admin_notice_update')->with([
+            'article' => $article,
+        ]);
+    }
+
+    // 管理お知らせ新規登録
+    public function notice_regist(ArticleUpdateRequest $request) 
+    {
+        $article = new Article();
+
+        DB::beginTransaction();
+        try {
+            $article->registArticle($request);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.notice')->with('message', 'お知らせ登録に失敗しました。');
+        }
+        DB::commit();
+        return redirect()->route('admin.notice')->with('message', 'お知らせを登録しました。');
     }
 
 
@@ -75,12 +95,12 @@ class ArticleController extends Controller
 
             
         } catch (Exception $e) {
-            return redirect()->route('notice')->with('message', '登録に失敗しました');
+            return redirect()->route('admin.notice')->with('message', '登録に失敗しました');
             DB::rollBack();
         }
 
         DB::commit();
-        return redirect()->route('notice')->with('message', 'お知らせ内容を更新しました。');
+        return redirect()->route('admin.notice')->with('message', 'お知らせ内容を更新しました。');
     }
 
     // 管理お知らせ削除

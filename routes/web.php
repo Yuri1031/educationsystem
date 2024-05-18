@@ -51,7 +51,7 @@ Route::get('/user/password_update_show', [App\Http\Controllers\UserController::c
 Route::get('/user/profile_update_show', [App\Http\Controllers\UserController::class, 'profile_update_show'])->name('profile.update.show');
 
 // お知らせページへ推移
-Route::get('/user/notice', [App\Http\controllers\ArticleController::class, 'user_notice'])->name('user.notice');
+Route::get('/user/notice/{id}', [App\Http\controllers\ArticleController::class, 'user_notice'])->name('user.notice');
 
 // -----機能------
 
@@ -87,6 +87,9 @@ Route::get('/admin/notice_update_show/{id}', [App\Http\Controllers\ArticleContro
 Route::get('/admin/banner_management', [App\Http\controllers\BannerController::class, 'banner_management'])->name('banner.management');
 
 // -----機能------
+
+// お知らせ新規登録
+Route::post('/admin/notice_regist', [App\Http\Controllers\ArticleController::class, 'notice_regist'])->name('admin.notice.regist');
 
 // お知らせ変更
 Route::post('/admin/notice_update/{id}', [App\Http\Controllers\ArticleController::class, 'notice_update'])->name('admin.notice.update');

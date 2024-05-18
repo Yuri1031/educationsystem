@@ -21,7 +21,7 @@
         <div class="password ">
           <dl>
             <dd>旧パスワード</dd>
-            <dt><input type="password" name="old_password"></dt>
+            <dt><input type="password" name="old_password" value="{{ $user->password }}"></dt>
             <div class="errorBox">
               @error('old_password')
                 <span class="errorText">{{ $message }}</span>
