@@ -5,44 +5,13 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Grade;
 
-class User extends Model implements Authenticatable
+
+class Admin extends Model implements Authenticatable
 {
-    public function grade()
-    {
-        return $this->belongsTo('App\Models\Grade');
-    }
-
-    // プロフィール変更
-    public function updataProfile($request, $user, $file_name)
-    {
-        if ($request->input('user_name') !== null) {
-            $user->name = $request->input('user_name');
-        }
-        
-        if ($request->input('user_name_kana') !== null) {
-            $user->name_kana = $request->input('user_name_kana');
-        }
-        
-        if ($request->input('email') !== null) {
-            $user->email = $request->input('email');
-        }
-
-        $user->profile_image = $file_name;
-        
-        $user->save();
-    }
+    use HasFactory;
 
 
-    // パスワード変更
-    public function updataPassword($request, $user)
-    {
-        $user->password = $request->input('new_password');
-
-        $user->save();
-    }
-    
 
     protected $primaryKey = 'id'; // データベースのプライマリキー
 
@@ -81,5 +50,4 @@ class User extends Model implements Authenticatable
     {
         return 'remember_token';
     }
-
 }

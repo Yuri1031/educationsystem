@@ -1,0 +1,64 @@
+table { 
+  text-align: left;
+  border-spacing: 20px;
+}
+
+table tr th {
+  width: 230px;
+}
+
+.registBtn {
+  display: block;
+  background-color: #149397;
+  padding: 5px 10px;
+  color: white;
+  border-radius: 7px;
+}
+
+.btn {
+  width: 70px;
+  text-align: center;
+  transition: 0.5s;
+}
+
+.btn a {
+  display: block;
+  padding: 5px 0;
+  border-radius: 7px;
+  color: white;
+}
+
+.showBtn {
+  background-color: #149397;
+}
+
+.deleteForm {
+  display: block;
+  height: 100%;
+}
+
+.deleteBtn {
+  display: block;
+  width: 100%;
+  padding: 7px 0;
+  background-color: #FF0000;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn:hover, .deleteBtn:hover{
+  opacity: 0.6;
+}
+
+.messageBox {
+  padding: 40px;
+  height: 36px;
+}
+
+.messageBox p {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+}
