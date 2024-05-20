@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Banner;
+use App\Models\Banners;
+use App\Models\Articles;
 
 use Illuminate\Http\Request;
 
@@ -14,16 +15,13 @@ class TopController extends Controller
      */
     public function index()
     {
-        return view('top');
+        $banners = Banners::all(); // 全てのバナーを取得
+        $articles = Articles::all(); // 全ての記事を取得    
+        return view('top', compact('articles', 'banners'));  
     }
 
     //bannerコントローラがあれば bannersindex を index に移動？？
-    public function bannersindex()
-    {
-        $banners = Banner::all();
-        return view('top', ['banners' => $banners]);
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      *

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 @include('user_header')
 <a href="/">戻る</a>
 
@@ -13,7 +14,7 @@
          <ul class="slider">
              @foreach($banners as $banner)
                  <li class="slider-item">
-                     <img src="{{ $banner->image }}" alt="Banner Image">
+                     <img src="{{ asset('storage/'.$banner->image) }}" alt="Banner Image" class="banner-img">
                  </li>
              @endforeach
          </ul>
@@ -34,19 +35,21 @@
     <h2>お知らせ</h2>
     <div style="padding: 10px; margin-bottom: 10px; border: 1px dashed #333333;">
       <div class="articles">
-         @if(isset($articles) && $articles->count() > 0)
-         <ul>
-           @foreach($articles as $article)
-             <li><span class="date">{{ $article->posted_date }}</span><a href="{{ route('article.show', $article->id) }}">{{ $article -> title }}</a></li>
-           @endforeach
-         </ul>
-         @else
-             <p>No articles found.</p>
-         @endif
+           @if(isset($articles) && $articles->count() > 0)
+             <ul>
+              @foreach($articles as $article)
+               <li><span class="date">{{ $article->posted_date }}</span><a href="{{ route('article.show', $article->id) }}">{{ $article->title }}</a></li>
+              @endforeach
+            </ul>
+           @else
+           <p>No articles found.</p>
+           @endif
       </div>
     </div>
 
     
 
 </body>
+
+</html>
 

@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('delivery_times', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('curriculums_id');
+            $table->unsignedBigInteger('curriculum_id');
             $table->dateTime('delivery_from');
             $table->dateTime('delivery_to');
             $table->timestamps();
 
-            $table->foreign('curriculums_id')->references('id')->on('curriculums');
+            $table->foreign('curriculum_id')->references('id')->on('curriculums');
         });
     }
 

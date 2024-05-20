@@ -3,12 +3,12 @@
 ===================================*/
 .slider {
     position:relative;
-      z-index: 1;
-      /*↑z-indexの値をh1のz-indexの値よりも小さくして背景に回す*/
-      height: 100vh;/*スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+    z-index: 1; /*↑z-indexの値をh1のz-indexの値よりも小さくして背景に回す*/
+    height: 50vh;/*スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+    
   }
   /*　背景画像設定　*/
-  
+  /*
   .slider-item01 {
       background:url(../img/img_01.jpg);
   }
@@ -20,19 +20,26 @@
   .slider-item03 {
       background:url(../img/img_03.jpg);
   }
-  
+  */
+
   .slider-item {
-      width: 100%;/*各スライダー全体の横幅を画面の高さいっぱい（100%）にする*/
-      height:100vh;/*各スライダー全体の縦幅を画面の高さいっぱい（100vh）にする*/
+      width: 50%;/*各スライダー全体の横幅を~にする。(画面の高さいっぱい(100))*/
+      height:45vh;/*各スライダー全体の縦幅を~にする。(画面の高さいっぱい(100vh))*/
       background-repeat: no-repeat;/*背景画像をリピートしない*/
       background-position: center;/*背景画像の位置を中央に*/
       background-size: cover;/*背景画像が.slider-item全体を覆い表示*/
   }
   
+  .banner-img {
+    width: 100%; /* 画像の横幅を親要素に合わせる */
+    height: 100%; /* 画像の高さを自動調整する */
+    object-fit: contain; /* 画像を見切れずに収める */
+  }
+   
+
+
   /*矢印の設定*/
-  
-  .slick-prev, 
-  .slick-next {
+  .slick-prev, .slick-next {
       position: absolute;
       z-index: 3;
       top: 42%;
@@ -54,10 +61,12 @@
       transform: rotate(45deg);
   }
   
-  /*ドットナビゲーションの設定*/
   
+  /*ドットナビゲーションの設定*/
   .slick-dots {
-      position: relative;
+      position: absolute;
+      left: 50%; /* 親要素の左端から50%の位置 */
+      transform: translateX(-50%); /* 自身の幅の50%だけ左に移動して中央揃え */
       z-index: 3;
       text-align:center;
       margin:-50px 0 0 0;/*ドットの位置*/
@@ -81,3 +90,4 @@
   .slick-dots .slick-active button{
       background:#333;/*ドットボタンの現在地表示の色*/
   }
+

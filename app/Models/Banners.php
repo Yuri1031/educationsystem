@@ -10,10 +10,7 @@ class Banners extends Model
 {
     use HasFactory;
 
-    public function getBannerImages(){
-        $banners = Banner::all();
-        return $banners;
-    }
-    
+    protected $fillable = ['image', 'created_at', 'updated_at'];
+        
 }
 

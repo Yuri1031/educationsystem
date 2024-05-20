@@ -18,10 +18,19 @@
                 <li><a href="">プロフィール設定</a></li>
             </ul>
             <ul class="status">
-                <!-- if文でログインかログアウト状態かで表示を変える -->
-                <li><a href="">ログイン</a></li>
-                <li>/</li>
-                <li><a href="">ログアウト</a></li>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('ログアウト') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                
+                
             </ul>
             
             

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Banners;
 use App\Models\Articles;
+
 
 class ArticlesController extends Controller
 {
@@ -46,8 +48,8 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        $articles = Articles::find($id);
-        return view('top',['article' => $article]);
+        $article = Articles::find($id);
+        return view('top', compact('article'));
     }
 
     /**

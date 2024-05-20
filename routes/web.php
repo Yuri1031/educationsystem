@@ -24,6 +24,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //トップ画面
 Route::get('/top', [App\Http\Controllers\TopController::class, 'index'])->name('top');
 Route::get('/top.banners', [App\Http\Controllers\TopController::class, 'bannersindex'])->name('top.banners');
+//トップ画面　お知らせ
+Route::get('/articles', [ArticlesController::class, 'index'])->name('articles.index');
+Route::get('/articles/{id}', [ArticlesController::class, 'show'])->name('article.show');
 
 //受講画面
 Route::get('/curriculums/{id}', [CurriculumController::class, 'show'])->name('curriculums.show');
