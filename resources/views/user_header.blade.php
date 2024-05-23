@@ -13,7 +13,7 @@
         @yield('content')
         <div class="header">
             <ul>
-                <li><a href="">時間割</a></li>
+                <li><a href="{{ route('curriculums') }}">時間割</a></li>
                 <li><a href="">授業進捗</a></li>
                 <li><a href="">プロフィール設定</a></li>
             </ul>
@@ -35,5 +35,14 @@
             
             
         </div>
+        <button onclick="goBack()">戻る</button>
+        <!-- 戻るボタン用のJavaScript -->
+        <script>
+           function goBack() {
+               window.history.back();
+            }
+        </script>
+
     </body>
 </html>
+

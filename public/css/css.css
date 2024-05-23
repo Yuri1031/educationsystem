@@ -1,5 +1,5 @@
 /*==================================================
-スライダーのためのcss
+トップ　bannerスライダーのためのcss
 ===================================*/
 .slider {
     position:relative;
@@ -89,5 +89,50 @@
   
   .slick-dots .slick-active button{
       background:#333;/*ドットボタンの現在地表示の色*/
+  }
+
+
+
+ 
+ 
+/*===========================================
+curriculum のためのcss
+=============================================*/
+
+.container{
+    margin-left: 20px;
+}
+
+.thumbnail{
+    position: relative;
+    width: 100%;/*各スライダー全体の横幅を~にする。(画面の高さいっぱい(100))*/
+    height:45vh;/*各スライダー全体の縦幅を~にする。(画面の高さいっぱい(100vh))*/
+    background-repeat: no-repeat;/*背景画像をリピートしない*/
+    background-position: left;/*背景画像の位置を中央に*/
+  }
+
+.thumbnail-img {
+    width: 50%; /* 画像の横幅を親要素に合わせる */
+    height: 100%; /* 画像の高さを自動調整する */
+    object-fit: contain; /* 画像を見切れずに収める */
+  }
+
+.enroll {
+    width: 50%; /* 画像の横幅を親要素に合わせる */
+    height: 100%; /* 画像の高さを自動調整する */
+  }
+
+.enroll-button {
+    position: absolute;
+    padding: 5px 10px;
+    background-color: #149397;
+    text-decoration: none;
+    color: white;
+    margin: 0 10px;
+    border-radius: 5px;
+  }
+
+.curriculum-info{
+    margin-top: 50px;
   }
 

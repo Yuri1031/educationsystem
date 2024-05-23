@@ -29,4 +29,7 @@ Route::get('/articles', [ArticlesController::class, 'index'])->name('articles.in
 Route::get('/articles/{id}', [ArticlesController::class, 'show'])->name('article.show');
 
 //受講画面
-Route::get('/curriculums/{id}', [CurriculumController::class, 'show'])->name('curriculums.show');
+Route::get('/curriculums', [App\Http\Controllers\CurriculumsController::class, 'index'])->name('curriculums');
+Route::get('/curriculums/{id}', [App\Http\Controllers\CurriculumsController::class, 'show'])->name('curriculums.show');
+//受講画面 「受講しました」ボタン処理
+Route::post('/curriculums/enroll', [App\Http\Controllers\CurriculumsController::class, 'enroll']);
