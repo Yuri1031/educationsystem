@@ -30,6 +30,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth'])->group(function () {
     Route::get('/user/curriculums', [CurriculumsController::class, 'index'])->name('user.curriculums');
     Route::get('/curriculum/{id}', [CurriculumController::class, 'show'])->name('user.curriculum.show');
+    Route::get('/schedule', [CurriculumsController::class, 'index'])->name('user.schedule');
+    Route::get('/curriculums/{gradeId}', [CurriculumsController::class, 'showSchedule'])->name('user.curriculums.byGrade');
 });
 
 // 管理者用ルート
@@ -53,9 +55,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/upload', [BannerController::class, 'store'])->name('banners.store');
     
         // パスワードリセット
-        Route::view('/admin/password/reset', 'admin/passwords/email');
-        Route::post('/admin/password/email', [App\Http\Controllers\admin\ForgotPasswordController::class, 'sendResetLinkEmail']);
-        Route::view('/admin/password/reset/{token}', [App\Http\Controllers\admin\ResetPasswordController::class,'showResetForm']);
-        Route::post('/admin/password/reset', [App\Http\Controllers\admin\ResetPasswordController::class, 'reset']);
+        // Route::view('/admin/password/reset', 'admin/passwords/email');
+        // Route::post('/admin/password/email', [App\Http\Controllers\admin\ForgotPasswordController::class, 'sendResetLinkEmail']);
+        // Route::view('/admin/password/reset/{token}', [App\Http\Controllers\admin\ResetPasswordController::class,'showResetForm']);
+        // Route::post('/admin/password/reset', [App\Http\Controllers\admin\ResetPasswordController::class, 'reset']);
     });
 });

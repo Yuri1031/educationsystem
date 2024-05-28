@@ -21,7 +21,7 @@
 
 </head>
 <body>
-    <div class="header">
+    <div class="header text-nowrap">
         @if(Auth::check())
         <ul>
             <li><a href="">授業管理</a></li>

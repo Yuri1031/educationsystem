@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class DeliveryTime extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['curriculums_id', 'delivery_from', 'delivery_to'];
+    protected $table = 'delivery_times';
 
     public function curriculum()
     {
-        return $this->belongsTo(Curriculum::class);
+        return $this->belongsTo(Curriculum::class, 'curriculums_id');
     }
 }
