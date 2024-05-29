@@ -67,11 +67,11 @@ class BannerController extends Controller
     
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $imageName = now()->format('YmdHis') . '_' . $key . '_' . $image->getClientOriginalName();
+                $imageName = now()->format('YmdHis') . '_' . $image->getClientOriginalName();
                 $dir = 'images';
     
                 if ($banner->image) {
-                    $oldImagePath = public_path('storage/images/') . $banner->image;
+                    $oldImagePath = storage_path('app/public/images/') . $banner->image;
                     if (file_exists($oldImagePath)) {
                         unlink($oldImagePath);
                     }

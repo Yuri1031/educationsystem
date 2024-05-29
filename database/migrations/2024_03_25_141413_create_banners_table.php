@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('banners', function (Blueprint $table) {
-            $table->integer('id');
+            $table->id();
             $table->string('image');
             $table->timestamps();
         });
