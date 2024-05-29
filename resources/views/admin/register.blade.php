@@ -32,10 +32,8 @@
 
                         <div class="row mb-3">
                             <label for="kana" class="col-md-4 col-form-label text-md-end">{{ __('カナ') }}</label>
-
                             <div class="col-md-6">
                                 <input id="kana" type="text" class="form-control @error('kana') is-invalid @enderror" name="kana" value="{{ old('kana') }}" required autocomplete="kana" autofocus>
-
                                 @error('kana')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

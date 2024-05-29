@@ -51,22 +51,24 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
+        \Log::info('Creating admin with data:', $data);
         try {
             return DB::transaction(function () use ($data) {
+                \Log::info('Inside transaction with data:', $data);
                 $admin = Admin::create([
                     'name' => $data['name'],
-                    'kana' => $data['name'],
+                    'kana' => $data['kana'],
                     'email' => $data['email'],
                     'password' => Hash::make($data['password']),
                 ]);
-    
+
                 return $admin;
             });
         } catch (\Exception $e) {
+            \Log::error('Error creating admin:', ['error' => $e->getMessage()]);
             DB::rollBack();
             throw $e;
         }
     }
-
 
 }

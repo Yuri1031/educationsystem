@@ -14,7 +14,6 @@ class CurriculumSeeder extends Seeder
      */
     public function run()
     {
-        // データを配列で準備
         $curriculums = [
             [
                 'title' => '国語',
@@ -40,7 +39,7 @@ class CurriculumSeeder extends Seeder
                 'title' => '理科',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => '理科の授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video3.mp4',
                 'alway_delivery_flg' => 0,
                 'grade_id' => 3,
                 'created_at' => now(),
@@ -50,7 +49,7 @@ class CurriculumSeeder extends Seeder
                 'title' => '社会',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => '社会の授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video4.mp4',
                 'alway_delivery_flg' => 0,
                 'grade_id' => 4,
                 'created_at' => now(),
@@ -60,7 +59,7 @@ class CurriculumSeeder extends Seeder
                 'title' => '英語',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => '英語の授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video5.mp4',
                 'alway_delivery_flg' => 0,
                 'grade_id' => 5,
                 'created_at' => now(),
@@ -70,7 +69,7 @@ class CurriculumSeeder extends Seeder
                 'title' => 'フランス語',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => 'フランス語の授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video6.mp4',
                 'alway_delivery_flg' => 1,
                 'grade_id' => 6,
                 'created_at' => now(),
@@ -80,7 +79,7 @@ class CurriculumSeeder extends Seeder
                 'title' => 'ドイツ語',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => 'ドイツ語の授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video7.mp4',
                 'alway_delivery_flg' => 1,
                 'grade_id' => 7,
                 'created_at' => now(),
@@ -90,7 +89,7 @@ class CurriculumSeeder extends Seeder
                 'title' => 'ヌンジャイ語',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => 'ヌンジャイ語の授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video8.mp4',
                 'alway_delivery_flg' => 1,
                 'grade_id' => 8,
                 'created_at' => now(),
@@ -100,7 +99,7 @@ class CurriculumSeeder extends Seeder
                 'title' => 'ペキスタン語',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => 'ペキスタンの授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video9.mp4',
                 'alway_delivery_flg' => 1,
                 'grade_id' => 9,
                 'created_at' => now(),
@@ -110,7 +109,7 @@ class CurriculumSeeder extends Seeder
                 'title' => '上学',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => '上学の授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video10.mp4',
                 'alway_delivery_flg' => 1,
                 'grade_id' => 10,
                 'created_at' => now(),
@@ -120,7 +119,7 @@ class CurriculumSeeder extends Seeder
                 'title' => '下学',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => '下学の授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video11.mp4',
                 'alway_delivery_flg' => 1,
                 'grade_id' => 11,
                 'created_at' => now(),
@@ -130,16 +129,14 @@ class CurriculumSeeder extends Seeder
                 'title' => 'ヤリラフィー語',
                 'thumbnail' => '20240504095515_0_Sample2.jpg',
                 'description' => 'ヤリラフィー語の授業',
-                'video_url' => 'https://example.com/video2.mp4',
+                'video_url' => 'https://example.com/video12.mp4',
                 'alway_delivery_flg' => 1,
                 'grade_id' => 12,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // 他のデータも同様に追加
         ];
 
-        // データを挿入
         foreach ($curriculums as $curriculum) {
             DB::table('curriculums')->insert($curriculum);
         }

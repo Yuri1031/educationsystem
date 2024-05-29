@@ -85,4 +85,8 @@
 </div>
 </div>
 </div>
+
+<!-- スクリプトの読み込み -->
+<script src="{{ asset('js/banner.js') }}"></script>
+
 @endsection
