@@ -1,0 +1,122 @@
+const subjects = [
+    { 
+        name: '国語', 
+        schedules: []
+    },
+    { 
+        name: '数学', 
+        schedules: []
+    },
+    { 
+        name: '社会', 
+        schedules: []
+    },
+    { 
+        name: '理科', 
+        schedules: []
+    },
+    { 
+        name: '英語', 
+        schedules: []
+    },
+    { 
+        name: '体育', 
+        schedules: []
+    }
+];
+
+function showSubjects(grade) {
+    const subjectsContainer = document.getElementById('subjects-container');
+    subjectsContainer.innerHTML = '';
+
+    const gradeTitle = document.createElement('h2');
+    gradeTitle.textContent = gradeToTitle(grade);
+    subjectsContainer.appendChild(gradeTitle);
+
+    const subjectsList = document.createElement('div');
+    subjectsList.className = 'subjects';
+
+    subjects.forEach(subject => {
+        const subjectDiv = document.createElement('div');
+        subjectDiv.className = 'subject';
+        
+        const subjectTitle = document.createElement('h3');
+        subjectTitle.textContent = subject.name;
+        subjectDiv.appendChild(subjectTitle);
+        //************************* */
+
+        const scheduleForm = document.createElement('div');
+        scheduleForm.innerHTML = `
+            <div style="margin-bottom: 10px;"></div>
+            <button onclick="addSchedule('${subject.name}')">追加</button>
+        `;
+        subjectDiv.appendChild(scheduleForm);
+
+        const scheduleList = document.createElement('ul');
+        scheduleList.className = 'schedule-list';
+        subject.schedules.forEach(schedule => {
+            const scheduleItem = document.createElement('li');
+            scheduleItem.textContent = `スケジュール: ${schedule}`;
+            scheduleList.appendChild(scheduleItem);
+        });
+        subjectDiv.appendChild(scheduleList);
+
+        subjectsList.appendChild(subjectDiv);
+    });
+
+    subjectsContainer.appendChild(subjectsList);
+}
+
+function addSchedule(subjectName) {
+    // 科目オブジェクトにスケジュールを追加
+    const subject = subjects.find(sub => sub.name === subjectName);
+    subject.schedules.push('');
+
+    // メインのHTMLにスケジュールを表示
+    showSubjects();
+}
+
+function gradeToTitle(grade) {
+    const titles = {
+        grade1: '小学校1年生の科目',
+        grade2: '小学校2年生の科目',
+        grade3: '小学校3年生の科目',
+        grade4: '小学校4年生の科目',
+        grade5: '小学校5年生の科目',
+        grade6: '小学校6年生の科目',
+        grade7: '中学校1年生の科目',
+        grade8: '中学校2年生の科目',
+        grade9: '中学校3年生の科目',
+        grade10: '高校1年生の科目',
+        grade11: '高校2年生の科目',
+        grade12: '高校3年生の科目',
+    };
+    return titles[grade];
+}
+
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.register-button, .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover, .button:hover {
+    background-color: #0056b3;
+}
+
+.register-button:active, .button:active {
+    background-color: #00408b;
+}

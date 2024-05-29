@@ -1,0 +1,26 @@
+・ Controllerの作成
+Controllerについてわかってきましたら、作成をしていきましょう。
+以下のコマンドでArticle Controller.phpが作成されます。
+
+php artisan make:controller ArticleController
+
+「Created successfully.」と出たら成功です。
+Controllerは「Laravelプロジェクト/app/Http/Controllers」配下に生成されます。
+今後はこちらのファイルに処理を書いていくことが多くなります。
+
+・Viewファイルの作成
+ブラウザで表示させる View を作成していきます。
+View ファイルは resources/views 直下に配置していきます。
+用途に応じてそれ以降でディレクトリ分けしても問題ありません。
+最初から welcome.blade.php というファイルがありますが、これが View ファイルです。
+
+「あれ？見た目の部分も PHP で書くの？そもそも Blade って何？」と思われるかもしれませんが、これはテンプレートエンジンの Blade を使用するための拡張子となります。実態はほとんどが HTML のコードになっています。
+
+5-2. Modelの作成
+それではModelを作成していきましょう。
+コード上からDB（データベース）を操作する為のModelファイルを作成していきます。
+以下のコマンドでArticleモデル（Article.php）が作成されます。
+php artisan make:model Article
+
+「Created successfully.」と出たら成功です。
+その後Article.phpを開き以下の部分を修正してください。

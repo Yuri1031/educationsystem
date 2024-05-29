@@ -16,13 +16,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_kana',255)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            //$table->string('profile_image',255);
+            $table->integer('grade_id')->nullable()->references('id')->on('curriculum');
             $table->rememberToken();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -34,3 +38,4 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+
