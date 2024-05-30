@@ -32,6 +32,7 @@
             <td class="btn">
               <form method="POST" action="{{ route('notice.delete', ['id' => $article->id]) }}" class="deleteForm">
                 @method('DELETE')
+                @csrf
                 <button type="button" id="deleteBtn" class="deleteBtn" data-id="{{ $article->id }}">削除</button>
               </form>
             </td>
@@ -42,5 +43,5 @@
     </div>
   </div>
 </body>
-<script src="{{ ('js/Ajax.js') }}"></script>
+<script src="{{ asset('js/Ajax.js') }}"></script>
 </html>

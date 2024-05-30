@@ -10,7 +10,7 @@ $(document).ready(function ()
       $.ajax({
         method: 'DELETE',
         type: 'DELETE',
-        url: '/educationsystem/public/notice_delete/'+dataId+'',
+        url: '/educationsystem/public/admin/notice_delete/'+dataId+'',
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
