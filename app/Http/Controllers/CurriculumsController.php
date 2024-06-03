@@ -16,10 +16,42 @@ class CurriculumsController extends Controller
      */
     public function index()
     {
-        $curriculums = Curriculums::all(); // 全て取得    
-        $grades = Grades::all();
-        return view('curriculums', compact('curriculums'));  
+        $curriculums = Curriculums::all(); // カリキュラムテーブルの全てを取得    
+        $grades = Grades::all();   
+        $user = Auth::user();
+        // 各カリキュラムに対して「配信期間内かどうか」「クリア済みかどうか」の判定をする
+        foreach ($curriculums as $curriculum) {
+            $curriculum->is_in_delivery_period = $this->isInDeliveryPeriod($curriculum);
+            $curriculum->enrolled = $this->isEnrolled($curriculum, $user);
+        }        
+        return view('curriculums', compact('curriculums'));
     }
+
+
+
+    private function isInDeliveryPeriod($curriculum)
+    {
+        if ($curriculum->always_delivery_flg) {
+            return true;
+        }
+
+        if ($curriculum->delivery_flg) {
+            $now = Carbon::now();
+            return $now->between($curriculum->delivery_start_date, $curriculum->delivery_end_date);
+        }
+
+        return false;
+    }
+
+
+
+
+    private function isEnrolled($curriculum, $user)
+    {
+        // 例: enrolledカラムがbooleanである場合
+        return $curriculum->enrolled;
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -50,11 +82,11 @@ class CurriculumsController extends Controller
      */
     public function show($id)
     {
-        $user = Auth::user();// 認証済みユーザーを取得
-        $curriculum = Curriculums::where('user_id', $user->id)->where('id', $id)->firstOrFail();// ユーザーに基づいてカリキュラムを取得
-        \Log::info($curriculum);// デバッグ用にログ出力
+        $curriculum = Curriculum::findOrFail($id);
+        \Log::info($curriculum); // デバッグ用にログ出力
         return view('curriculums', compact('curriculum')); // ビューにデータを渡す
     }
+
 
     public function enroll(Request $request)
     {
