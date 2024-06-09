@@ -1,3 +1,5 @@
+console.log("読み込み成功");
+
 document.addEventListener('DOMContentLoaded', function() {
     const gradeButtons = document.querySelectorAll('.grade-button');
     const selectedGradeButton = document.getElementById('selected-grade');

@@ -48,7 +48,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::view('/top', 'admin/top')->name('top');
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-        Route::resource('banners', 'BannerController');
+        // Route::resource('banners', 'BannerController');
+        Route::resource('banners', BannerController::class);
         Route::put('admin/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
         Route::delete('admin/banner/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
         Route::get('/banner', [BannerController::class, 'index'])->name('banner');
