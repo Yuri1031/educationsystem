@@ -31,7 +31,13 @@ body {
     margin: 90px 60px 25px 0;
 }
 
-.buttons {
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* 各教科を枠で囲むスタイル */
+.form-group{
     display: flex;
     flex-direction: column;
     margin-right: 20px;
@@ -39,7 +45,8 @@ body {
     padding: 10px;
 }
 
-button {
+
+.grade-button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -51,43 +58,6 @@ button {
     width: 200px;
 }
 
-button:hover {
-    background-color: #45a049;
-}
-
-#subjects-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
-    flex-grow: 1;
-    margin-left: 20px;
-    text-align: center;
-    height: 850px;
-}
-
-.subjects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    list-style-type: none;
-    padding: 0;
-}
-
-
-
-/* 各教科を枠で囲むスタイル */
-.subjects li {
-    display: inline-block;
-    /* width: calc(33.33% - 10px); グリッド間のギャップを考慮して幅を調整 */
-    margin: 50px;
-    padding: 130px;
-    vertical-align: top;
-    box-sizing: border-box;
-    border: 1px solid #707070;
-        
-}
 .button-group {
     display: flex;
     gap: 10px;

@@ -16,7 +16,7 @@
     <br>
     <h1>こんにちは、ここは新規授業登録ページです。</h1>
     <h2>授業フォーム</h2>
-    <form action="{{ route('curriculum_store') }}" method="POST">
+    <form action="{{ route('curriculum_store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="thumbnail_image">サムネイル画像:</label>
@@ -31,9 +31,7 @@
                 </option>
             @endforeach
         </select>
-        <p>ここまでは試しています。</p>
         <br>
-        <!-- aaaaaaaaaaaaaaaaaaa -->
         <label for="title">授業名:</label>
         <input type="text" id="title" name="title">
         <label for="video_url">動画URL:</label>

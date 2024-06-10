@@ -15,6 +15,12 @@
         @include('admin_header') <!-- 共通ヘッダーをインクルード -->
         @section('content')
         <div class="container">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
             <!-- 戻るボタンを押すと管理-授業一覧へ戻る形にしたい -->
             <a href="{{ route('curriculum_list') }}">←戻る</a>
             <h1 class="main_title">配信日時設定</h1>

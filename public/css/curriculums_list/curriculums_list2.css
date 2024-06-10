@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.title_style {
+    margin-left: 50px;
+    display: flex;
+}
+
+/* 各教科を枠で囲むスタイル */
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+
+.grade-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+    width: 200px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+.register-button, .button {
+    display: inline-block;
+    padding: 15px 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+.register-button:hover, .button:hover {
+    background-color: #0056b3;
+}
+.register-button:active, .button:active {
+    background-color: #00408b;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+.card {
+
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.card img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.card p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.button {
+    background-color: #5bc0de;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #31b0d5;
+}

@@ -31,12 +31,23 @@ Route::get('/user',[App\Http\Controllers\UserController::class, 'user'])->name('
 
 //　管理画面
 
-//配信日時設定ページへ遷移
-Route::get('/delivery_time',[Delivery_timeController::class, 'showDeliveryForm'])->name('delivery');
-//配信日時設定のバリエーションへ
-Route::post('/delivery_time',[Delivery_timeController::class, 'delivery_submit'])->name('delivery.submit');
-//配信日時設定ページから授業一覧ページへ戻る
+//授業一覧ページへ戻る
 Route::get('/curriculum_list',[Curriculum_List::class, 'showCurriculum_List'])->name('curriculum_list');
+
+Route::post('/check-grade', [Curriculum_List::class, 'checkGrade'])->name('checkGrade');
+
+
+//***************************************************************** */
+
+
+
+//配信日時設定ページへ遷移
+Route::get('/delivery_time/{id}/show',[Delivery_timeController::class, 'showDelivery'])->name('delivery_show');
+
+
+
+//配信日時設定のバリエーションへ
+Route::post('/delivery_submit',[Delivery_timeController::class, 'delivery_submit'])->name('delivery.submit');
 
 
 //*************************************************************** */
@@ -45,6 +56,9 @@ Route::get('/curriculum_list',[Curriculum_List::class, 'showCurriculum_List'])->
 //授業編集ページへ遷移
 Route::get('/curriculum_edit',[CurriculumController::class, 'CurriculumEdit'])->name('curriculum_edit');
 
+
+
+//******************************************************************** */
 
 
 //新規授業設定ページへ遷移

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('curriculums', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255)->unique();
+            $table->string('title', 255);
             $table->string('thumbnail', 255)->nullable();
             $table->longText('description');
             $table->mediumText('video_url');
