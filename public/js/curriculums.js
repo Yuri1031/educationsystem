@@ -42,18 +42,15 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             document.querySelector('#curriculums-container').innerHTML = data.html;
-            document.querySelector('#pagination-links').innerHTML = data.links;
             document.querySelector('.current-month').innerHTML = `
                 <a href="#" class="month-change-link" data-year="${data.previousMonth.year}" data-month="${data.previousMonth.month}">◀</a>
                 ${data.currentYear}年${data.currentMonth}月スケジュール
                 <a href="#" class="month-change-link" data-year="${data.nextMonth.year}" data-month="${data.nextMonth.month}">▶</a>
             `;
 
-            // フォームの値を更新
             yearInput.value = data.currentYear;
             monthInput.value = data.currentMonth;
 
-            // 学年が選択されていた場合、その情報を保持
             if (data.gradeName) {
                 selectedGradeButton.innerText = data.gradeName;
             }
@@ -75,35 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             document.querySelector('#curriculums-container').innerHTML = data.html;
-            document.querySelector('#pagination-links').innerHTML = data.links;
             selectedGradeButton.innerText = data.gradeName;
         })
         .catch(error => console.error('Error fetching curriculums:', error));
-    }
-});
-
-// ページネーションの非同期化
-document.addEventListener('DOMContentLoaded', function () {
-    const links = document.querySelector('#pagination-links');
-
-    links.addEventListener('click', function (e) {
-        if (e.target.tagName === 'A') {
-            e.preventDefault();
-            fetchPage(e.target.href);
-        }
-    });
-
-    function fetchPage(url) {
-        fetch(url, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.querySelector('#curriculums-container').innerHTML = data.html;
-            document.querySelector('#pagination-links').innerHTML = data.links;
-        })
-        .catch(error => console.error('Error fetching page:', error));
     }
 });

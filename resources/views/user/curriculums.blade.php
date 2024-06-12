@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <table class="table table-borderless align-middle">
+        <table class="table table-borderless align-top">
             <thead>
                 <tr>
                     <th>
@@ -55,14 +55,6 @@
                                 @include('user.list', ['curriculums' => $curriculums])
                             </tbody>
                         </table>
-                    </td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td colspan="4">
-                        <div id="pagination-links">
-                            {{ $curriculums->links() }}
-                        </div>
                     </td>
                 </tr>
             </tbody>

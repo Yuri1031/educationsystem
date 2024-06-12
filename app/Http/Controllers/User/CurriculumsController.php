@@ -25,8 +25,6 @@ class CurriculumsController extends Controller
             $currentDate = Carbon::create($currentYear, $currentMonth, 1);
             $previousMonth = $currentDate->copy()->subMonth();
             $nextMonth = $currentDate->copy()->addMonth();
-            $startOfMonth = $currentDate->startOfMonth();
-            $endOfMonth = $currentDate->endOfMonth();
     
             $grades = Grade::all();
             $gradeId = $request->input('grade_id');
@@ -42,7 +40,6 @@ class CurriculumsController extends Controller
             if ($request->ajax()) {
                 return response()->json([
                     'html' => view('user.list', compact('curriculums'))->render(),
-                    'links' => $curriculums->links()->render(),
                     'currentYear' => $currentYear,
                     'currentMonth' => $currentMonth,
                     'previousMonth' => [
@@ -57,7 +54,7 @@ class CurriculumsController extends Controller
                 ]);
             }
     
-            return view('user.curriculums', compact('currentYear', 'currentMonth', 'previousMonth', 'nextMonth', 'startOfMonth', 'endOfMonth', 'curriculums', 'grades', 'gradeId', 'gradeName'));
+            return view('user.curriculums', compact('currentYear', 'currentMonth', 'previousMonth', 'nextMonth', 'curriculums', 'grades', 'gradeId', 'gradeName'));
         } catch (\Exception $e) {
             Log::error('Error fetching curriculums: ' . $e->getMessage());
             return back()->withErrors('カリキュラムを取得する際にエラーが発生しました。');
@@ -67,7 +64,31 @@ class CurriculumsController extends Controller
     private function getCurriculums($gradeId, $year, $month)
     {
         try {
-            $curriculums = Curriculum::filterByGradeAndMonth($gradeId, $year, $month)->paginate(6);
+            $startOfMonth = Carbon::create($year, $month, 1)->startOfMonth();
+            $endOfMonth = Carbon::create($year, $month, 1)->endOfMonth();
+    
+            $query = Curriculum::query();
+    
+            if ($gradeId) {
+                $query->where('grade_id', $gradeId);
+            }
+    
+            $query->where(function ($query) use ($startOfMonth, $endOfMonth) {
+                $query->where('alway_delivery_flg', 0)
+                      ->orWhere(function ($query) use ($startOfMonth, $endOfMonth) {
+                          $query->where('alway_delivery_flg', 1)
+                                ->whereHas('deliveryTimes', function ($query) use ($startOfMonth, $endOfMonth) {
+                                    $query->where('delivery_from', '<=', $endOfMonth)
+                                          ->where('delivery_to', '>=', $startOfMonth);
+                                });
+                      });
+            })->with(['deliveryTimes' => function ($query) use ($startOfMonth, $endOfMonth) {
+                $query->where('delivery_from', '<=', $endOfMonth)
+                      ->where('delivery_to', '>=', $startOfMonth);
+            }]);
+    
+            $curriculums = $query->get();
+            
             return $curriculums;
         } catch (\Exception $e) {
             Log::error('Error fetching curriculums in private method: ' . $e->getMessage());
@@ -78,13 +99,17 @@ class CurriculumsController extends Controller
     public function showSchedule()
     {
         try {
+            $currentYear = now()->year;
+            $currentMonth = now()->month;
+    
             $grades = Grade::all();
-
+            $curriculums = Curriculum::filterByGradeAndMonth(null, $currentYear, $currentMonth)->get();
+    
             return view('user.curriculums', [
                 'grades' => $grades,
-                'currentYear' => now()->year,
-                'currentMonth' => now()->month,
-                'curriculums' => Curriculum::with('deliveryTimes')->get()
+                'currentYear' => $currentYear,
+                'currentMonth' => $currentMonth,
+                'curriculums' => $curriculums
             ]);
         } catch (\Exception $e) {
             Log::error('Error fetching schedule: ' . $e->getMessage());
