@@ -15,21 +15,16 @@
         @include('admin_header') <!-- 共通ヘッダーをインクルード -->
         @section('content')
         <div class="container">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-            <!-- 戻るボタンを押すと管理-授業一覧へ戻る形にしたい -->
+            @method('PUT')
             <a href="{{ route('curriculum_list') }}">←戻る</a>
+
             <h1 class="main_title">配信日時設定</h1>
-
-            <h2 class="#">授業タイトルが入る（授業一覧から持ってくる形）</h2>
-
+                <h2 class="#">
+                    授業タイトル
+                </h2>
             <!-- ここから入力フォーム -->
             <h2>配信日時設定</h2>
-            <form method="post" action="#">
+            <form action="#" method="POST" enctype="multipart/form-data">
                 <div id="input-groups">
                     <!-- 初期の入力グループ -->
                     <div class="input-group" id="group-0">

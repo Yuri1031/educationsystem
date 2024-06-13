@@ -39,15 +39,14 @@ Route::post('/check-grade', [Curriculum_List::class, 'checkGrade'])->name('check
 
 //***************************************************************** */
 
-
-
 //配信日時設定ページへ遷移
 Route::get('/delivery_time/{id}/show',[Delivery_timeController::class, 'showDelivery'])->name('delivery_show');
 
-
-
 //配信日時設定のバリエーションへ
 Route::post('/delivery_submit',[Delivery_timeController::class, 'delivery_submit'])->name('delivery.submit');
+
+//配信日時設定ページから送信
+Route::put('/delivery_time/{id}/preference', [Delivery_timeController::class, 'preference'])->name('time_preference');
 
 
 //*************************************************************** */

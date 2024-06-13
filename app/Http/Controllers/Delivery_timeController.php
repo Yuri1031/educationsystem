@@ -14,10 +14,19 @@ class Delivery_timeController extends Controller
     public function showDelivery($id){
 
             $show_curriculums = new Curriculum();
-            $curriculums = $show_curriculums -> show($id);
+            $curriculums_id = $show_curriculums -> show($id);
+            $curriculums = $show_curriculums -> curriculums();
+
             
-        return view('delivery_times/delivery_time' , compact('curriculums'));
+        return view('delivery_times/delivery_time' , compact('curriculums_id' , 'curriculums'));
     }
+
+    public function preference($request , $id)
+    {
+00
+    }
+
+
 
     public function delivery_submit(){
         //
