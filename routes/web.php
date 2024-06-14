@@ -25,8 +25,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// 授業一覧画面へルーティング
-Route::get('/curriculums', [CurriculumController::class, 'index']);
+
+Route::prefix('curriculum')->group(function () {
+    // 授業一覧画面へルーティング
+    Route::get('/', [CurriculumController::class, 'index']);
+});
+
 
 //戻るボタン 管理のトップページへ遷移(作業外のためいったん保留)
 Route::get('/user',[App\Http\Controllers\UserController::class, 'user'])->name('user');
@@ -63,7 +67,7 @@ Route::get('/curriculum_edit',[CurriculumController::class, 'CurriculumEdit'])->
 //******************************************************************** */
 
 
-//新規授業設定ページへ遷移
-Route::get('/curriculum',[CurriculumController::class, 'CurriculumCreate'])->name('curriculum_create');
-//新規授業設定ページから送信
-Route::post('/curriculum_store',[CurriculumController::class, 'CurriculumStore'])->name('curriculum_store');
+////新規授業設定ページへ遷移
+//Route::get('/curriculum',[CurriculumController::class, 'CurriculumCreate'])->name('curriculum_create');
+////新規授業設定ページから送信
+//Route::post('/curriculum_store',[CurriculumController::class, 'CurriculumStore'])->name('curriculum_store');
