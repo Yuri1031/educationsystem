@@ -25,6 +25,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// 授業一覧画面へルーティング
+Route::get('/curriculums', [CurriculumController::class, 'index']);
+
 //戻るボタン 管理のトップページへ遷移(作業外のためいったん保留)
 Route::get('/user',[App\Http\Controllers\UserController::class, 'user'])->name('user');
 

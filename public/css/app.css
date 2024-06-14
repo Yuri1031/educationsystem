@@ -1,0 +1,9 @@
+/*　app.cssでは汎用的なスタイルを定義する */
+
+.d-flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}

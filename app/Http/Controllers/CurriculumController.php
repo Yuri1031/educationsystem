@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Curriculum;
+use App\Models\Grade;
 use App\Http\Requests\CurriculumsRequest;
 
 class CurriculumController extends Controller
 {
+    // 授業一覧を表示
+    public function index()
+    {
+        return view('curriculums.index');
+    }
+
     //授業内容編集-画面へ移動
     public function CurriculumEdit(){
         return view('curriculums\curriculums');
