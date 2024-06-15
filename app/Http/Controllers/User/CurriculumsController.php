@@ -21,22 +21,35 @@ class CurriculumsController extends Controller
         try {
             $currentYear = $request->input('year', date('Y'));
             $currentMonth = $request->input('month', date('n'));
-    
+
             $currentDate = Carbon::create($currentYear, $currentMonth, 1);
             $previousMonth = $currentDate->copy()->subMonth();
             $nextMonth = $currentDate->copy()->addMonth();
-    
+
             $grades = Grade::all();
             $gradeId = $request->input('grade_id');
             $gradeName = null;
-    
+
             if ($gradeId) {
                 $selectedGrade = Grade::find($gradeId);
                 $gradeName = $selectedGrade ? $selectedGrade->name : null;
             }
-    
+
             $curriculums = $this->getCurriculums($gradeId, $currentYear, $currentMonth);
-    
+
+            foreach ($curriculums as $curriculum) {
+                $curriculum->isWithinDeliveryTime = $curriculum->alway_delivery_flg === 1;
+
+                if (!$curriculum->isWithinDeliveryTime) {
+                    foreach ($curriculum->deliveryTimes as $deliveryTime) {
+                        if (Carbon::now()->between($deliveryTime->delivery_from, $deliveryTime->delivery_to)) {
+                            $curriculum->isWithinDeliveryTime = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
             if ($request->ajax()) {
                 return response()->json([
                     'html' => view('user.list', compact('curriculums'))->render(),
@@ -53,7 +66,7 @@ class CurriculumsController extends Controller
                     'gradeName' => $gradeName,
                 ]);
             }
-    
+
             return view('user.curriculums', compact('currentYear', 'currentMonth', 'previousMonth', 'nextMonth', 'curriculums', 'grades', 'gradeId', 'gradeName'));
         } catch (\Exception $e) {
             Log::error('Error fetching curriculums: ' . $e->getMessage());
@@ -66,17 +79,17 @@ class CurriculumsController extends Controller
         try {
             $startOfMonth = Carbon::create($year, $month, 1)->startOfMonth();
             $endOfMonth = Carbon::create($year, $month, 1)->endOfMonth();
-    
+
             $query = Curriculum::query();
-    
+
             if ($gradeId) {
                 $query->where('grade_id', $gradeId);
             }
-    
+
             $query->where(function ($query) use ($startOfMonth, $endOfMonth) {
-                $query->where('alway_delivery_flg', 0)
+                $query->where('alway_delivery_flg', 1)
                       ->orWhere(function ($query) use ($startOfMonth, $endOfMonth) {
-                          $query->where('alway_delivery_flg', 1)
+                          $query->where('alway_delivery_flg', 0)
                                 ->whereHas('deliveryTimes', function ($query) use ($startOfMonth, $endOfMonth) {
                                     $query->where('delivery_from', '<=', $endOfMonth)
                                           ->where('delivery_to', '>=', $startOfMonth);
@@ -86,9 +99,9 @@ class CurriculumsController extends Controller
                 $query->where('delivery_from', '<=', $endOfMonth)
                       ->where('delivery_to', '>=', $startOfMonth);
             }]);
-    
+
             $curriculums = $query->get();
-            
+
             return $curriculums;
         } catch (\Exception $e) {
             Log::error('Error fetching curriculums in private method: ' . $e->getMessage());
@@ -101,10 +114,10 @@ class CurriculumsController extends Controller
         try {
             $currentYear = now()->year;
             $currentMonth = now()->month;
-    
+
             $grades = Grade::all();
             $curriculums = Curriculum::filterByGradeAndMonth(null, $currentYear, $currentMonth)->get();
-    
+
             return view('user.curriculums', [
                 'grades' => $grades,
                 'currentYear' => $currentYear,
