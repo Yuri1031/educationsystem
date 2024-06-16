@@ -10,7 +10,7 @@ use App\Models\Grade;
 class Curriculum extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'title',
         'thumbnail',
@@ -28,7 +28,7 @@ class Curriculum extends Model
         return $this->belongsTo('App\Models\Grade');
     }
 
-    public function getList() 
+    public function getList()
     {
         // gradesテーブルからデータを取得
         $grades = DB::table('grades')->get();
@@ -42,7 +42,7 @@ class Curriculum extends Model
         $curriculums = $query->get();
         return $curriculums;
     }
-    
+
     public function getCurriculum()
     {
         $query = Self::query();
@@ -66,7 +66,7 @@ class Curriculum extends Model
         //ここにサムネイル画像を入れる
         // 商品画像を保存
         if ($request->hasFile('thumbnail_image')) {
-            
+
             return back()->with('error', 'ファイルがアップロードされていません');
             $imagePath = $request->file('thumbnail_image')->store('images', 'public');
             $curriculums->thumbnail = $imagePath;
@@ -79,5 +79,20 @@ class Curriculum extends Model
 
         $curriculums->save();
         return $curriculums;
+    }
+
+
+    // 以下は岡崎の編集箇所
+    /**
+     *
+     */
+    public static function findByGradeId($id)
+    {
+        return self::where('grade_id', $id)->get();
+    }
+
+    public function getDeliveryTimes()
+    {
+        return DeliveryTime::findByCurriculumId($this->id);
     }
 }
