@@ -27,10 +27,11 @@ Route::get('/', function () {
 
 Route::prefix('curriculums')->group(function () {
     // 授業一覧画面へルーティング
-    Route::get('/{id}', [CurriculumController::class, 'index'])->name('curriculums.list');
-    Route::get('/', function () {
+    Route::get('/list/{id}', [CurriculumController::class, 'index'])->name('curriculums.list');
+    Route::get('/list', function () {
         return redirect()->route('curriculums.list', [ 'id' => 1, ]);
-    });
+    })->name('curriculums.list.default');
+
 });
 
 
