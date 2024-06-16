@@ -13,7 +13,7 @@
     <!-- app.cssでは、汎用的なスタイルを定義している -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
-    <link rel="stylesheet" href="{{ asset('css\curriculums\curriculums.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/curriculums/curriculums.css') }}">
     <title>授業設定</title>
 </head>
 <body>
@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="curriculum-list__card-actions">
-                                <a class="curriculum-list__card-action-btn bg-btn-primary border">授業編集</a>
+                                <a class="curriculum-list__card-action-btn bg-btn-primary border">授業内容編集</a>
                                 <a class="curriculum-list__card-action-btn bg-btn-primary border">配信日時編集</a>
                             </div>
                         </div>
