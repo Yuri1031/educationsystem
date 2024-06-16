@@ -18,17 +18,20 @@ class DeliveryTimesSeeder extends Seeder
     {
         $curriculums = Curriculum::all();
         foreach ($curriculums as $curriculum) {
-            $day = rand(0, 30);
-            $from_hour = rand(9, 17);
-            $duration = rand(1, 3);
-            $from = new DateTime('2024-06-' . $day . ' ' . $from_hour . ':00:00');
-            $to = (clone $from)->modify('+' . $duration . ' hours');
-            $data = [
-                'curriculums_id' => $curriculum->id,
-                'delivery_from' => $from,
-                'delivery_to' => $to,
-            ];
-            DeliveryTime::create($data);
+            $q = rand(0, 10);
+            for ($i = 0; $i <= $q; $i++) {
+                $day = rand(0, 30);
+                $from_hour = rand(9, 17);
+                $duration = rand(1, 3);
+                $from = new DateTime('2024-06-' . $day . ' ' . $from_hour . ':00:00');
+                $to = (clone $from)->modify('+' . $duration . ' hours');
+                $data = [
+                    'curriculums_id' => $curriculum->id,
+                    'delivery_from' => $from,
+                    'delivery_to' => $to,
+                ];
+                DeliveryTime::create($data);
+            }
         }
     }
 }
