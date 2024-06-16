@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Delivery_time extends Model
+class DeliveryTime extends Model
 {
     use HasFactory;
 
@@ -15,5 +15,8 @@ class Delivery_time extends Model
         'delicery_to',
     ];
 
-    
+    public static function findByCurriculumId($id)
+    {
+        return self::where('curriculums_id', $id)->get();
+    }
 }
