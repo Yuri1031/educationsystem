@@ -8,6 +8,9 @@
         <title>user共通ヘッダー</title>
         <!-- cssをインポート -->
         <link rel="stylesheet" href="{{ asset('css/admin_header.css') }}">
+
+        <!-- jqueryをロード -->
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     </head>
     <body>
         @yield('content')
@@ -23,8 +26,8 @@
                 <li>/</li>
                 <li><a href="">ログアウト</a></li>
             </ul>
-            
-            
+
+
         </div>
     </body>
 </html>
