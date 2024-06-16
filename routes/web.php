@@ -22,13 +22,15 @@ use App\Http\Controllers\Curriculum_List;
 // ⚪︎⚪︎.show -> 詳細
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('curriculums.list', [ 'id' => 1, ]);
 });
 
-
-Route::prefix('curriculum')->group(function () {
+Route::prefix('curriculums')->group(function () {
     // 授業一覧画面へルーティング
-    Route::get('/', [CurriculumController::class, 'index']);
+    Route::get('/{id}', [CurriculumController::class, 'index'])->name('curriculums.list');
+    Route::get('/', function () {
+        return redirect()->route('curriculums.list', [ 'id' => 1, ]);
+    });
 });
 
 
