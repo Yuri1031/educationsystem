@@ -47,3 +47,116 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #45a049;
 }
+
+
+/* 以下は岡崎が追加した部分 */
+.content {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.menu {
+    margin: 0 60px;
+}
+
+a.menu__register-btn {
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 20px;
+    white-space: nowrap;
+}
+
+.menu__item-wrapper {
+    margin-top: 120px;
+}
+
+a.menu__item {
+    border-radius: 100px;
+    color: #ffffff;
+    cursor: pointer;
+    display: block;
+    margin: 20px 0;
+    padding: 8px 20px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.menu__item * {
+    color: #ffffff;
+}
+
+.curriculum-list {
+    margin: 0 50px;
+}
+
+.curriculum-list__grade {
+    border-radius: 10px;
+    padding: 10px 30px;
+    width: fit-content;
+}
+
+.curriculum-list__grade * {
+    font-weight: normal;
+    color: #ffffff;
+}
+
+.curriculum-list__body {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.curriculum-list__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px 20px;
+    padding: 20px;
+    width: 25%;
+    max-width: 350px;
+    min-width: 300px;
+}
+
+.curriculum-list__card * {
+    font-size: 1rem;
+}
+
+.curriculum-list__card-title {
+    /*font-size: 1.5rem;*/
+    margin: 10px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.curriculum-list__card-title * {
+    font-size: 1.5rem;
+    white-space: nowrap;
+}
+
+.curriculum-list__card-delivery-times {
+    height: 7rem;
+    margin-top: 20px;
+}
+
+.curriculum-list__card-delivery-times * {
+    white-space: nowrap;
+}
+
+.curriculum-list__card-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+a.curriculum-list__card-action-btn {
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 10px;
+    white-space: nowrap;
+}

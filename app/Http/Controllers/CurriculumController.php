@@ -10,9 +10,12 @@ use App\Http\Requests\CurriculumsRequest;
 class CurriculumController extends Controller
 {
     // 授業一覧を表示
-    public function index()
+    public function index($id = 1)
     {
-        return view('curriculums.index');
+        $grades = Grade::all();
+        $listed_grade = Grade::find($id);
+        $curriculums = Curriculum::findByGradeId($id);
+        return view('curriculums.index', compact('grades', 'listed_grade', 'curriculums'));
     }
 
     //授業内容編集-画面へ移動

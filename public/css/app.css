@@ -1,9 +1,50 @@
 /*　app.cssでは汎用的なスタイルを定義する */
 
-.d-flex {
-    display: flex;
+/* 画面に共通する構造に対するクラス */
+.wrapper {
+    margin: 0 auto;
+    min-width: 1200px;
+    max-width: 70vw;
+    align-self: center;
 }
 
-.flex-row {
-    flex-direction: row;
+.wrapper .header {
+    background-color: transparent;
+    display: block;
+}
+
+.header__link {
+    font-size: 1.5em;
+}
+
+.header__title {
+    margin-left: 20px;
+}
+
+
+/* borderに関するクラス */
+.border {
+    border: solid 1px #bababa;
+}
+
+
+/* background-colorに関するクラス */
+.bg-btn-primary {
+    background-color: #169398;
+}
+
+.bg-btn-secondary {
+    background-color: #608284;
+}
+
+.bg-elementary {
+    background-color: #89e5f5;
+}
+
+.bg-junior-high {
+    background-color: #77d5d4;
+}
+
+.bg-high {
+    background-color: #94d058;
 }
