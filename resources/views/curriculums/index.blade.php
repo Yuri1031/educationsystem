@@ -25,7 +25,7 @@
 
         <div class="header">
             <!-- 戻るボタンを押すと管理-授業一覧へ戻る形にしたい -->
-            <a class="header__link" href="{{ route('curriculum_list') }}">←戻る</a>
+            <a class="header__back" href="{{ route('curriculums.list.default') }}">←戻る</a>
             <h1 class="header__title">授業一覧</h1>
         </div>
 
@@ -33,7 +33,8 @@
         <div class="content">
 
             <div class="menu">
-                <a class="menu__register-btn bg-btn-primary border">新規登録</a>
+                <a class="menu__register-btn bg-btn-primary border"
+                   href="{{ route('curriculums.create') }}">新規登録</a>
 
                 <div class="menu__item-wrapper">
                     @foreach($grades as $grade)
