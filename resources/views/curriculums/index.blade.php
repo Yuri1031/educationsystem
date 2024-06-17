@@ -61,22 +61,25 @@
                                 </div>
 
                                 <div class="curriculum-list__card-delivery-times">
-                                    @php
-                                        $delivery_times = $curriculum->getDeliveryTimes();
+                                    @if ($curriculum->always_delivery_flg)
+                                        <span>常時公開</span>
+                                    @else
+                                        @php
+                                            $delivery_times = $curriculum->getDeliveryTimes();
                                         $max_display = 4;
-                                    @endphp
-                                    @for ($i = 0; $i < $max_display; $i++)
-                                        @if ($i < count($delivery_times))
-                                            @php
-                                                $delivery_time = $delivery_times[$i];
-                                            @endphp
-                                            <span>{{ $delivery_time->delivery_from->format('n月j日  H:i') }} ~ {{ $delivery_time->delivery_to->format('H:i') }}</span><br>
+                                        @endphp
+                                        @for ($i = 0; $i < $max_display; $i++)
+                                            @if ($i < count($delivery_times))
+                                                @php
+                                                    $delivery_time = $delivery_times[$i];
+                                                @endphp
+                                                <span>{{ $delivery_time->delivery_from->format('n月j日  H:i') }} ~ {{ $delivery_time->delivery_to->format('H:i') }}</span><br>
+                                            @endif
+                                        @endfor
+                                        @if (count($delivery_times) > $max_display)
+                                            <span>他{{ count($delivery_times) - $max_display }}件</span>
                                         @endif
-                                    @endfor
-                                    @if (count($delivery_times) > $max_display)
-                                        <span>他{{ count($delivery_times) - $max_display }}件</span>
                                     @endif
-
                                 </div>
                             </div>
 
