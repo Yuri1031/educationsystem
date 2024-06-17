@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Delivery_timeController;
+use App\Http\Controllers\DeliveryTimeController;
 use App\Http\Controllers\CurriculumController;
 use App\Http\Controllers\Curriculum_List;
 
@@ -32,8 +32,15 @@ Route::prefix('curriculums')->group(function () {
         return redirect()->route('curriculums.list', [ 'id' => 1, ]);
     })->name('curriculums.list.default');
 
+    // 授業設定画面へルーティング
+    // 授業を新規登録する場合と、授業内容を編集する場合を分ける
     Route::get('/create', [CurriculumController::class, 'create'])->name('curriculums.create');
     Route::get('/edit/{id}', [CurriculumController::class, 'edit'])->name('curriculums.edit');
+});
+
+Route::prefix('delivery_times')->group(function () {
+    // 配信日時設定画面へルーティング
+    Route::get('/edit/{curriculum_id}', [DeliveryTimeController::class, 'edit'])->name('delivery_times.edit');
 });
 
 

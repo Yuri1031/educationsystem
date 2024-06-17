@@ -9,6 +9,13 @@ use App\Models\Curriculum;
 
 class DeliveryTimeController extends Controller
 {
+    public function edit($curriculum_id)
+    {
+        $curriculum = Curriculum::find($curriculum_id);
+        $delivery_times = $curriculum->getDeliveryTimes();
+        return view('delivery_times.form', compact('curriculum', 'delivery_times'));
+    }
+
     //配信日時設定画面
     public function showDelivery($id){
 

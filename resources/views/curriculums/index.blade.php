@@ -87,7 +87,14 @@
                                 <a class="curriculum-list__card-action-btn bg-btn-primary border"
                                    href="{{ route('curriculums.edit', [ 'id' => $curriculum->id, ]) }}"
                                 >授業内容編集</a>
-                                <a class="curriculum-list__card-action-btn bg-btn-primary border">配信日時編集</a>
+
+                                <a class="curriculum-list__card-action-btn bg-btn-primary border"
+                                   @if ($curriculum->always_delivery_flg)
+                                       onclick="alert('常時公開に設定されているため、配信日時を編集できません')"
+                                   @else
+                                       href="{{ route('delivery_times.edit', [ 'curriculum_id' => $curriculum->id, ]) }}"
+                                    @endif
+                                >配信日時編集</a>
                             </div>
                         </div>
                     @endforeach
