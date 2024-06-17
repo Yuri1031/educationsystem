@@ -6,7 +6,7 @@
 --}}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja" translate="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,7 +81,9 @@
                             </div>
 
                             <div class="curriculum-list__card-actions">
-                                <a class="curriculum-list__card-action-btn bg-btn-primary border">授業内容編集</a>
+                                <a class="curriculum-list__card-action-btn bg-btn-primary border"
+                                   href="{{ route('curriculums.edit', [ 'id' => $curriculum->id, ]) }}"
+                                >授業内容編集</a>
                                 <a class="curriculum-list__card-action-btn bg-btn-primary border">配信日時編集</a>
                             </div>
                         </div>
