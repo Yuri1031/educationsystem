@@ -28,7 +28,7 @@ class CurriculumsSeeder extends Seeder
                     'title' => '授業' . $i,
                     'description' => '説明',
                     'video_url' => 'https://video.com/video/' . $i,
-                    'thumbnail' => 'test.png',
+                    'thumbnail' => basename($dir),
                     'grade_id' => $g,
                     'created_at' => $now,
                     'updated_at' => $now,
