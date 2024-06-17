@@ -39,7 +39,6 @@ class CurriculumsController extends Controller
             $now = Carbon::now();
             return $now->between($curriculum->delivery_start_date, $curriculum->delivery_end_date);
         }
-
         return false;
     }
 
@@ -82,7 +81,10 @@ class CurriculumsController extends Controller
      */
     public function show($id)
     {
-        $curriculum = Curriculum::findOrFail($id);
+        $curriculum = Curriculums::findOrFail($id);
+        $curriculum->is_in_delivery_period = $this->isInDeliveryPeriod($curriculum);
+        $curriculum->enrolled = $this->isEnrolled($curriculum, Auth::user());
+
         \Log::info($curriculum); // デバッグ用にログ出力
         return view('curriculums', compact('curriculum')); // ビューにデータを渡す
     }

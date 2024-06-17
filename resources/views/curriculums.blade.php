@@ -16,7 +16,6 @@
 <body>
     <div class="container">
         <div class="content">
-        @foreach($curriculums as $curriculum)
           <!--動画-->
           <div class="thumbnail">
              <a href="{{ $curriculum->video_url }}">
@@ -48,7 +47,6 @@
               </div>
                
           </div>
-          @endforeach
         </div>
     </div>
 
