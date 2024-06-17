@@ -32,6 +32,8 @@ Route::prefix('curriculums')->group(function () {
         return redirect()->route('curriculums.list', [ 'id' => 1, ]);
     })->name('curriculums.list.default');
 
+    Route::get('/create', [CurriculumController::class, 'create'])->name('curriculums.create');
+    Route::get('/edit/{id}', [CurriculumController::class, 'edit'])->name('curriculums.edit');
 });
 
 

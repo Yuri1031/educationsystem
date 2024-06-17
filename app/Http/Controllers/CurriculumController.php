@@ -18,6 +18,20 @@ class CurriculumController extends Controller
         return view('curriculums.index', compact('grades', 'listed_grade', 'curriculums'));
     }
 
+    public function create()
+    {
+        $curriculum = null;
+        $grades = Grade::all();
+        return view('curriculums.form', compact('curriculum', 'grades'));
+    }
+
+    public function edit($id)
+    {
+        $curriculum = Curriculum::find($id);
+        $grades = Grade::all();
+        return view('curriculums.form', compact('curriculum',  'grades', ));
+    }
+
     //授業内容編集-画面へ移動
     public function CurriculumEdit(){
         return view('curriculums\curriculums');

@@ -22,6 +22,7 @@ class CurriculumsSeeder extends Seeder
 
         for ($g = 1; $g <= 12; $g++) {
             $q = rand(1, 10);
+            $always_delivery = rand(1, 10) > 7;
             for ($i = 0; $i < $q; $i++) {
                 $now = Carbon::now();
                 $data = [
@@ -29,6 +30,7 @@ class CurriculumsSeeder extends Seeder
                     'description' => '説明',
                     'video_url' => 'https://video.com/video/' . $i,
                     'thumbnail' => basename($dir),
+                    'always_delivery_flg' => $always_delivery,
                     'grade_id' => $g,
                     'created_at' => $now,
                     'updated_at' => $now,

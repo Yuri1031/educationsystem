@@ -1,0 +1,80 @@
+/* resources/views/curriculums/form.blade.phpに使用する */
+
+.content {
+    margin-top: 30px;
+    padding: 0 70px;
+}
+
+.curriculum-form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    min-width: 40vw;
+}
+
+.curriculum-form__thumbnail-editor {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+}
+
+.curriculum-form__thumbnail-editor .preview-area {
+    aspect-ratio: 5 / 3;
+    background-color: #eaeaea;
+    width: 40%;
+}
+
+.preview * {
+    margin: 10px;
+}
+
+.curriculum-form__field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 8px 15%;
+}
+
+.curriculum-form__field label {
+    white-space: nowrap;
+}
+
+.curriculum-form__field input[type="text"],select,textarea,input::file-selector-button {
+    background-color: #ffffff;
+    box-sizing: content-box;
+    padding: 5px 2px;
+    width: 60%;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.curriculum-form__field textarea {
+    resize: none;
+}
+
+.curriculum-form__field--thumbnail {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0 10px;
+    height: fit-content;
+}
+
+.curriculum-form__field--always-delivery {
+    margin: 30px auto 0 auto;
+    width: fit-content;
+}
+
+.curriculum-form__field--always-delivery * {
+    cursor: pointer;
+}
+
+.curriculum-form__save-btn {
+    border-width: 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size:1.5rem;
+    margin: 30px auto;
+    padding: 5px 75px;
+    width: fit-content;
+
+}

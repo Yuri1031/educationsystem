@@ -21,12 +21,19 @@
     margin-left: 20px;
 }
 
+img {
+    aspect-ratio: 5 / 3;
+}
+
 
 /* borderに関するクラス */
 .border {
     border: solid 1px #bababa;
 }
 
+input::file-selector-button {
+    border: solid 1px #bababa;
+}
 
 /* background-colorに関するクラス */
 .bg-btn-primary {

@@ -95,4 +95,9 @@ class Curriculum extends Model
     {
         return DeliveryTime::findByCurriculumId($this->id);
     }
+
+    public function getThumbnailUrl()
+    {
+        return asset('storage/uploads/' . $this->id . '/' . $this->thumbnail);
+    }
 }
