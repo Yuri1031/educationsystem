@@ -40,12 +40,7 @@
 }
 
 .curriculum-form__field input[type="text"],select,textarea,input::file-selector-button {
-    background-color: #ffffff;
-    box-sizing: content-box;
-    padding: 5px 2px;
     width: 60%;
-    border-style: solid;
-    border-width: 1px;
 }
 
 .curriculum-form__field textarea {
