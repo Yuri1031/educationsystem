@@ -12,58 +12,58 @@
   <div class="container">
     <a href="{{ route('admin.notice') }}">←戻る</a>
     <div class="messageBox">
-        <p>{{ session('message') }}</p>
-      </div>
-      @if($article === null)
-      <!-- 新規登録用form -->
-      <form action="{{ route('admin.notice.regist') }}" method="POST">
+      <p>{{ session('message') }}</p>
+    </div>
+    @if($article === null)
+    <!-- 新規登録用form -->
+    <form action="{{ route('admin.notice.regist') }}" method="POST">
+    @else
+    <!-- 更新用form -->
+    <form action="{{ route('admin.notice.update',  ['id' => $article->id]) }}" method="POST">
+      @endif
+      @csrf
+      <dl>
+        <dd>投稿日時</dd>
+        @if($article === null)
+        <!-- 新規登録用 -->
+        <dt><input type="date" name="posted_date"></dt>
         @else
-        <!-- 更新用form -->
-        <form action="{{ route('admin.notice.update',  ['id' => $article->id]) }}" method="POST">
-          @endif
-          @csrf
-          <dl>
-            <dd>投稿日時</dd>
-            @if($article === null)
-            <!-- 新規登録用 -->
-            <dt><input type="date" name="posted_date"></dt>
-            @else
-            <!-- 更新用 -->
-            <dt><input type="date" name="posted_date" value="{{ $article->posted_date }}"></dt>
-            @endif
-            <div class="errorBox">
-              @error('posted_date')
-              <span class="errorText">{{ $message }}</span>
-              @enderror
-            </div>
-          </dl>
-          <dl>
-            <dd>タイトル</dd>
-            @if($article === null)
-            <!-- 新規登録用 -->
-            <dt><input type="text" name="title"></dt>
-            @else
-            <!-- 更新用 -->
-            <dt><input type="text" value="{{ $article->title }}" name="title"></dt>
-            @endif
-            <div class="errorBox">
-              @error('title')
-              <span class="errorText">{{ $message }}</span>
-              @enderror
-            </div>
-          </dl>
-          <dl>
-            <dd>本文</dd>
-            @if($article === null)
-            <!-- 新規登録用 -->
-          <dt><textarea cols="20" rows="10" name="article_contents"></textarea></dt>
-          @else
-          <!-- 更新用 -->
-          <dt><textarea cols="20" rows="10" name="article_contents">{{ $article->article_contents }}</textarea></dt>
-          @endif
+        <!-- 更新用 -->
+        <dt><input type="date" name="posted_date" value="{{ $article->posted_date }}"></dt>
+        @endif
+        <div class="errorBox">
+          @error('posted_date')
+          <span class="errorText">{{ $message }}</span>
+          @enderror
+        </div>
+      </dl>
+      <dl>
+        <dd>タイトル</dd>
+        @if($article === null)
+        <!-- 新規登録用 -->
+        <dt><input type="text" name="title"></dt>
+        @else
+        <!-- 更新用 -->
+        <dt><input type="text" value="{{ $article->title }}" name="title"></dt>
+        @endif
+        <div class="errorBox">
+          @error('title')
+          <span class="errorText">{{ $message }}</span>
+          @enderror
+        </div>
+      </dl>
+      <dl>
+        <dd>本文</dd>
+        @if($article === null)
+        <!-- 新規登録用 -->
+        <dt><textarea cols="20" rows="10" name="article_contents"></textarea></dt>
+        @else
+        <!-- 更新用 -->
+        <dt><textarea cols="20" rows="10" name="article_contents">{{ $article->article_contents }}</textarea></dt>
+        @endif
         <div class="errorBox">
           @error('article_contents')
-            <span class="errorText">{{ $message }}</span>
+          <span class="errorText">{{ $message }}</span>
           @enderror
         </div>
       </dl>
