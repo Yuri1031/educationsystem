@@ -1,11 +1,13 @@
+
+
 function addInputGroup() {
     const container = document.getElementById('input-groups');
     const index = container.children.length;
-    
+
     const inputGroup = document.createElement('div');
     inputGroup.className = 'input-group';
     inputGroup.id = `group-${index}`;
-    
+
     inputGroup.innerHTML = `
         <label for="start_date${index}">開始日${index + 1}</label>
         <input type="text" name="start_date[]" id="start_date${index}" placeholder="例: 20230713">
@@ -17,7 +19,7 @@ function addInputGroup() {
         <input type="text" name="end_time[]" id="end_time${index}" placeholder="例: 1230">
         <button type="button" class="remove-button" onclick="removeInputGroup(${index})">削除</button>
     `;
-    
+
     container.appendChild(inputGroup);
 }
 
