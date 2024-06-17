@@ -18,19 +18,19 @@
         <div class="content">
           <!--動画-->
           <div class="thumbnail">
-             <a href="{{ $curriculum->video_url }}">
-                <img src="{{ asset('storage/' .$curriculum->thumbnail) }}" alt="thumbnail" class="thumbnail-img">
-             </a>
-             @if($curriculum->is_in_delivery_period)
+            <a href="{{ $curriculum->video_url }}">
+              <img src="{{ asset('storage/' .$curriculum->thumbnail) }}" alt="thumbnail" class="thumbnail-img">
+            </a>
+            @if($curriculum->is_in_delivery_period)
                @if($curriculum->enrolled)
                  <button class="enroll-button disabled" disabled>受講済み</button>
-               @else
+                @else
                  <button class="enroll-button" data-course-id="{{ $curriculum->id }}">受講しました</button>
                @endif
              @else
                <button class="enroll-button disabled" disabled>配信期間外</button>
-             @endif
-          </div>
+           @endif
+    </div>
 
 
           <!--カリキュラム情報-->
