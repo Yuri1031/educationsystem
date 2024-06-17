@@ -5,15 +5,11 @@
         $video_url = $curriculum->video_url;
         $description = $curriculum->description;
         $always_delivery = $curriculum->always_delivery_flg ? 'checked' : '';
-
-        $button_label = '保存';
     } else {
         $title = '';
         $video_url = '';
         $description = '';
         $always_delivery = '';
-
-        $button_label = '登録';
     }
 @endphp
 
@@ -83,7 +79,7 @@
                     <label for="always_delivery_flg">常時公開</label>
                 </div>
 
-                <input type="submit" value="{{ $button_label }}" class="form__register-btn bg-btn-secondary">
+                <input type="submit" value="登録" class="form__register-btn bg-btn-secondary">
             </form>
         </div>
     </div>
