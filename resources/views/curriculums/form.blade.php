@@ -83,7 +83,7 @@
                     <label for="always_delivery_flg">常時公開</label>
                 </div>
 
-                <input type="submit" value="{{ $button_label }}" class="curriculum-form__save-btn bg-btn-secondary">
+                <input type="submit" value="{{ $button_label }}" class="form__register-btn bg-btn-secondary">
             </form>
         </div>
     </div>
