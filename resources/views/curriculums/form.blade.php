@@ -5,11 +5,17 @@
         $video_url = $curriculum->video_url;
         $description = $curriculum->description;
         $always_delivery = $curriculum->always_delivery_flg ? 'checked' : '';
+
+        $action = route('curriculums.update', [ 'id' => $curriculum->id ]);
+        $method = 'PUT';
     } else {
         $title = '';
         $video_url = '';
         $description = '';
         $always_delivery = '';
+
+        $action = route('curriculums.store');
+        $method = 'POST';
     }
 @endphp
 
@@ -36,8 +42,12 @@
 
         <div class="content">
 
-            <form method="POST" enctype="multipart/form-data" class="curriculum-form">
+            <form action="{{ $action }}" method="POST" enctype="multipart/form-data" class="curriculum-form">
                 @csrf
+                @if ($is_edit)
+                    @method('PUT')
+                @endif
+
                 <div class="curriculum-form__thumbnail-editor">
                     <div class="preview-area">
                         <img id="thumbnail-preview" src="{{ $is_edit ? $curriculum->getThumbnailUrl() : asset('img/noimage.jpg') }}" alt="no image" width="100%">
@@ -52,7 +62,7 @@
                     <label for="grade_id">学年</label>
                     <select name="grade_id" id="grade_id" class="border">
                         @foreach ($grades as $grade)
-                            <option value="{{ $grade->id }}" {{ request('grade_id') == $grade->id ? 'selected' : '' }}>
+                            <option value="{{ $grade->id }}" {{ $is_edit && $curriculum->grade_id == $grade->id ? 'selected' : '' }}>
                                 {{ $grade->name }}
                             </option>
                         @endforeach
@@ -75,7 +85,7 @@
                 </div>
 
                 <div class="curriculum-form__field curriculum-form__field--always-delivery">
-                    <input type="checkbox" id="always_delivery_flg" name="always_delivery_flg" value="true" {{ $always_delivery }}>
+                    <input type="checkbox" id="always_delivery_flg" name="always_delivery_flg" value="1" {{ $always_delivery }}>
                     <label for="always_delivery_flg">常時公開</label>
                 </div>
 
