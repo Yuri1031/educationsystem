@@ -16,7 +16,7 @@ class Curriculum extends Model
         'thumbnail',
         'description',
         'video_url',
-        'alway_delivery_flg',
+        'always_delivery_flg',
         'grade_id',
     ];
 
