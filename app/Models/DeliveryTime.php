@@ -10,6 +10,9 @@ class DeliveryTime extends Model
 {
     use HasFactory;
 
+    const DATE_FORMAT = 'Ymd';
+    const TIME_FORMAT = 'Hi';
+
     protected $fillable = [
         'curriculums_id',
         'delivery_from',
@@ -24,6 +27,25 @@ class DeliveryTime extends Model
     public function getDeliveryToAttribute($value)
     {
         return new DateTime($value);
+    }
+
+    public function getDeliveryDateFrom() {
+        return $this->delivery_from->format(self::DATE_FORMAT);
+    }
+
+    public function getDeliveryDateTo()
+    {
+        return $this->delivery_to->format(self::DATE_FORMAT);
+    }
+
+    public function getDeliveryTimeFrom()
+    {
+        return $this->delivery_from->format(self::TIME_FORMAT);
+    }
+
+    public function getDeliveryTimeTo()
+    {
+        return $this->delivery_to->format(self::TIME_FORMAT);
     }
 
     public static function findByCurriculumId($id)

@@ -1,0 +1,48 @@
+.content {
+    margin-top: 30px;
+    padding: 0 70px;
+}
+
+.delivery-time-form__curriculum-title {
+    margin-bottom: 30px;
+}
+
+.delivery-time-form__body {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: fit-content;
+}
+
+.delivery-time-form__fields {
+    margin: 10px 0;
+}
+
+.delivery-time-form__fields input {
+    margin: 0 10px;
+}
+
+.delivery-time-form__delete-btn {
+    background-color: #ff0000;
+    border-radius: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+}
+
+.delivery-time-form__add-btn {
+    align-self: start;
+    background-color: #07bc69;
+    border-radius: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    margin-top: 30px;
+    width: 36px;
+    height: 36px;
+}
+
+.delivery-time-form__register-btn {
+    margin-top: 30px;
+}
