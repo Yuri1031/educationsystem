@@ -1,0 +1,8 @@
+1. php artisan storage:link
+を実行する。サムネイルを保存するための、ストレージのシンボリックリンクを作成する。
+
+2. php artisan migrate
+を実行する。DBの各種テーブルを作成する。
+
+3. php artisan db:seed --class=GradesSeeder
+を実行し、gradesテーブルに学年データのレコードを作成する。
