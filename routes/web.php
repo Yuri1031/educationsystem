@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeliveryTimeController;
 use App\Http\Controllers\CurriculumController;
-use App\Http\Controllers\Curriculum_List;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -42,44 +40,3 @@ Route::prefix('delivery_times')->group(function () {
     // 配信日時設定画面へルーティング
     Route::get('/edit/{curriculums_id}', [DeliveryTimeController::class, 'edit'])->name('delivery_times.edit');
 });
-
-
-//戻るボタン 管理のトップページへ遷移(作業外のためいったん保留)
-Route::get('/user',[App\Http\Controllers\UserController::class, 'user'])->name('user');
-
-
-//　管理画面
-
-//授業一覧ページへ戻る
-Route::get('/curriculum_list',[Curriculum_List::class, 'showCurriculum_List'])->name('curriculum_list');
-
-Route::post('/check-grade', [Curriculum_List::class, 'checkGrade'])->name('checkGrade');
-
-
-//***************************************************************** */
-
-//配信日時設定ページへ遷移
-Route::get('/delivery_time/{id}/show',[Delivery_timeController::class, 'showDelivery'])->name('delivery_show');
-
-//配信日時設定のバリエーションへ
-Route::post('/delivery_submit',[Delivery_timeController::class, 'delivery_submit'])->name('delivery.submit');
-
-//配信日時設定ページから送信
-Route::put('/delivery_time/{id}/preference', [Delivery_timeController::class, 'preference'])->name('time_preference');
-
-
-//*************************************************************** */
-
-
-//授業編集ページへ遷移
-Route::get('/curriculum_edit',[CurriculumController::class, 'CurriculumEdit'])->name('curriculum_edit');
-
-
-
-//******************************************************************** */
-
-
-////新規授業設定ページへ遷移
-//Route::get('/curriculum',[CurriculumController::class, 'CurriculumCreate'])->name('curriculum_create');
-////新規授業設定ページから送信
-//Route::post('/curriculum_store',[CurriculumController::class, 'CurriculumStore'])->name('curriculum_store');
