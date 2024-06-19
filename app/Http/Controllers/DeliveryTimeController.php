@@ -55,28 +55,4 @@ class DeliveryTimeController extends Controller
         $delivery_time->setDeliveryFrom($request->input('date_from'), $request->input('time_from'));
         $delivery_time->setDeliveryTo($request->input('date_to'), $request->input('time_to'));
     }
-
-
-
-    //配信日時設定画面
-    public function showDelivery($id){
-
-            $show_curriculums = new Curriculum();
-            $curriculums_id = $show_curriculums -> show($id);
-            $curriculums = $show_curriculums -> curriculums();
-
-
-        return view('delivery_times/delivery_time' , compact('curriculums_id' , 'curriculums'));
-    }
-
-    public function preference($request , $id)
-    {
-
-    }
-
-
-
-    public function delivery_submit(){
-        //
-    }
 }
