@@ -23,17 +23,19 @@ class Curriculum extends Model
 
     protected $table = 'curriculums';
 
-    // 以下は岡崎の編集箇所
+    // ある学年の全ての授業を取得する
     public static function findByGradeId($id)
     {
         return self::where('grade_id', $id)->get();
     }
 
+    // この授業の全ての配信日時を取得する
     public function getDeliveryTimes()
     {
         return DeliveryTime::findByCurriculumId($this->id);
     }
 
+    // この授業のサムネイル画像のURLを取得する
     public function getThumbnailUrl()
     {
         return asset('storage/uploads/' . $this->id . '/' . $this->thumbnail);

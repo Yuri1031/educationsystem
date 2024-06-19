@@ -59,7 +59,6 @@ DeliveryTimesClient.prototype.sendRequest = function() {
                     resolve(res);　// Promiseを解決
                 },
                 error: function(xhr) {
-                    alert('Delete failed!');
                 }
             })
         }));
@@ -77,7 +76,6 @@ DeliveryTimesClient.prototype.sendRequest = function() {
                     resolve(res); // Promiseを解決
                 },
                 error: function(xhr) {
-                    alert('Update failed!');
                 }
             })
         }));
@@ -95,7 +93,6 @@ DeliveryTimesClient.prototype.sendRequest = function() {
                     resolve(res);　// Promiseを解決
                 },
                 error: function(xhr) {
-                    // alert('Create failed!');
                 }
             })
         }));
