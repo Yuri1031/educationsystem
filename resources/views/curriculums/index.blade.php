@@ -32,12 +32,15 @@
 
         <div class="content">
 
+            <!-- 左側の学年を選択できるメニュー -->
             <div class="menu">
+                <!-- 授業新規登録のボタン -->
                 <a class="menu__register-btn bg-btn-primary border"
                    href="{{ route('curriculums.create') }}">新規登録</a>
 
                 <div class="menu__item-wrapper">
                     @foreach($grades as $grade)
+                        <!-- app.cssに、bg-{学年の区分}というgradeの区分ごとの背景色を選択できるクラスを用意している-->
                         <a class="d-block menu__item border bg-{{ $grade->getDivision() }}"
                            href="{{ route('curriculums.list', [ 'id' => $grade->id ]) }}"
                         >{{ $grade->name }}</a>
@@ -45,12 +48,17 @@
                 </div>
             </div>
 
+            <!-- 授業一覧　-->
             <div class="curriculum-list">
+
+                <!-- どの学年の授業一覧かを示すタイトル -->
                 <div class="curriculum-list__grade border bg-{{ $listed_grade->getDivision() }}">
                     <h1>{{ $listed_grade->name }}</h1>
                 </div>
 
+                <!-- 授業一覧の本体 -->
                 <div class="curriculum-list__body">
+                    <!-- その学年に登録されている授業の分だけ繰り返して、授業を表示する -->
                     @foreach ($curriculums as $curriculum)
                         <div class="curriculum-list__card border">
                             <div>
@@ -60,15 +68,16 @@
                                     <span>{{ $curriculum->title }}</span>
                                 </div>
 
+                                <!-- 授業1つの表示 -->
                                 <div class="curriculum-list__card-delivery-times">
-                                    @if ($curriculum->always_delivery_flg)
+                                    @if ($curriculum->always_delivery_flg) {{-- 常時公開の場合は、「常時公開」と表示 --}}
                                         <span>常時公開</span>
-                                    @else
+                                    @else {{-- 常時公開ではない場合は、登録された配信日時を表示 --}}
                                         @php
                                             $delivery_times = $curriculum->getDeliveryTimes();
-                                        $max_display = 4;
+                                            $max_display = 4; // 表示する配信日時の上限は4とする（任意）
                                         @endphp
-                                        @for ($i = 0; $i < $max_display; $i++)
+                                        @for ($i = 0; $i < $max_display; $i++) {{-- 上限に達するまで、配信日時を表示していく --}}
                                             @if ($i < count($delivery_times))
                                                 @php
                                                     $delivery_time = $delivery_times[$i];
@@ -76,22 +85,25 @@
                                                 <span>{{ $delivery_time->delivery_from->format('n月j日  H:i') }} ~ {{ $delivery_time->delivery_to->format('H:i') }}</span><br>
                                             @endif
                                         @endfor
-                                        @if (count($delivery_times) > $max_display)
+                                        @if (count($delivery_times) > $max_display) {{-- 上限数より配信日時が多い場合は、「他〇件」と表示 --}}
                                             <span>他{{ count($delivery_times) - $max_display }}件</span>
                                         @endif
                                     @endif
                                 </div>
                             </div>
 
+                            <!-- 授業編集と、配信日時編集のためのボタン -->
                             <div class="curriculum-list__card-actions">
                                 <a class="curriculum-list__card-action-btn bg-btn-primary border"
+                                   {{-- 『授業設定画面』へのルートを指定 --}}
                                    href="{{ route('curriculums.edit', [ 'id' => $curriculum->id, ]) }}"
                                 >授業内容編集</a>
 
                                 <a class="curriculum-list__card-action-btn bg-btn-primary border"
-                                   @if ($curriculum->always_delivery_flg)
+                                   @if ($curriculum->always_delivery_flg) {{-- 常時公開の場合は、編集できないように、アラートを表示させる --}}
                                        onclick="alert('常時公開に設定されているため、配信日時を編集できません')"
                                    @else
+                                       {{-- 常時公開でない場合は、配信日時設定画面へのルーティングを指定 --}}
                                        href="{{ route('delivery_times.edit', [ 'curriculums_id' => $curriculum->id, ]) }}"
                                     @endif
                                 >配信日時編集</a>

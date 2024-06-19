@@ -12,7 +12,6 @@
     {{-- CDNでFontAwesomeのアイコンを読み込む --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-{{--    <script src="{{ asset('js/delivery_times/delivery.js') }}"></script>--}}
     <title>配信日時設定</title>
 </head>
 <body>
@@ -26,17 +25,24 @@
 
         <div class="content">
 
+            <!-- 授業タイトルを表示 -->
             <div class="delivery-time-form__curriculum-title">
                 <h2>{{ $curriculum->title }}</h2>
             </div>
 
+            <!-- 配信日時設定のためのフォーム。<input>は、InputFieldsManager(public/js/delivery_times/delivery.js)が管理する -->
             <form action="#" method="POST" enctype="multipart/form-data" class="delivery-time-form__body">
                 @csrf
+                <!-- この<div>内に、<input>グループが追加されていく -->
                 <div class="delivery-time-form__fields-wrapper">
                 </div>
+
+                <!-- <input>グループの追加ボタン -->
                 <button type="button" class="add-button delivery-time-form__add-btn border">
                     <i class="fa-sharp fa-solid fa-plus"></i>
                 </button>
+
+                <!--　登録ボタン -->
                 <button type="submit" class="delivery-time-form__register-btn form__register-btn bg-btn-secondary">登録</button>
             </form>
         </div>
@@ -46,7 +52,7 @@
     import InputFieldsManager from "{{ asset('js/delivery_times/delivery.js') }}";
     import DeliveryTimesClient from "{{ asset('js/delivery_times/client.js') }}";
 
-    // clientがリクエストを送信する
+    // リクエストを送信するクライアントを作成
     const client = new DeliveryTimesClient({{ $curriculum->id }});
     // managerが<input>グループの追加と、clientへの値の受け渡しを行う
     const manager = new InputFieldsManager('.delivery-time-form__fields-wrapper', client);
@@ -65,7 +71,7 @@
         manager.appendFields();
     @endif
 
-        // 追加ボタンを押すと<input>のグループを追加する
+    // 追加ボタンを押すと<input>のグループを追加する
     $('.delivery-time-form__add-btn').click((e) => {
         manager.appendFields();
     });
