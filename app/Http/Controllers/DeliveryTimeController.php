@@ -10,6 +10,7 @@ use App\Models\Curriculum;
 
 class DeliveryTimeController extends Controller
 {
+    // 『配信日時設定画面』を表示
     public function edit($curriculums_id)
     {
         $curriculum = Curriculum::find($curriculums_id);
@@ -17,6 +18,7 @@ class DeliveryTimeController extends Controller
         return view('delivery_times.form', compact('curriculum', 'delivery_times'));
     }
 
+    // 配信日時を作成
     public function store(Request $request)
     {
         $delivery_time = new DeliveryTime();
@@ -25,11 +27,11 @@ class DeliveryTimeController extends Controller
         $delivery_time->save();
 
         return response()->json([
-            'c_id' => $delivery_time->curriculums_id,
             'status' => 'success',
         ], 200);
     }
 
+    // 配信日時を更新
     public function update(Request $request, $id)
     {
         $delivery_time = DeliveryTime::findOrFail($id);
@@ -41,6 +43,7 @@ class DeliveryTimeController extends Controller
         ], 200);
     }
 
+    // 配信日時を削除
     public function destroy($id)
     {
         $delivery_time = DeliveryTime::findOrFail($id);
@@ -50,6 +53,7 @@ class DeliveryTimeController extends Controller
         ], 200);
     }
 
+    // リクエストからデータを引き出して、$delivery_timeのdelivery_from、delivery_toをセット
     private function setDeliveryInfo(Request $request, $delivery_time)
     {
         $delivery_time->setDeliveryFrom($request->input('date_from'), $request->input('time_from'));

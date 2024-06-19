@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CurriculumController extends Controller
 {
-    // 授業一覧を表示
+    // 『授業一覧画面』を表示
     public function index($id = 1)
     {
         $grades = Grade::all();
@@ -19,13 +19,16 @@ class CurriculumController extends Controller
         return view('curriculums.index', compact('grades', 'listed_grade', 'curriculums'));
     }
 
+    // 登録用で『授業設定画面』を表示
     public function create()
     {
+        // $curriculumにnullをセットしておくことで、resources/views/curriculums/form.blade.phpは、授業登録に用いられると判断する
         $curriculum = null;
         $grades = Grade::all();
         return view('curriculums.form', compact('curriculum', 'grades'));
     }
 
+    // 編集用で『授業設定画面』を表示
     public function edit($id)
     {
         $curriculum = Curriculum::find($id);
@@ -33,6 +36,7 @@ class CurriculumController extends Controller
         return view('curriculums.form', compact('curriculum',  'grades', ));
     }
 
+    // 授業を作成する
     public function store(Request $request)
     {
         if (!$request->hasFile('thumbnail_image')) {
@@ -52,17 +56,21 @@ class CurriculumController extends Controller
         return redirect()->route('curriculums.list.default');
     }
 
+    // 授業を更新する
     public function update(Request $request, $id)
     {
         $curriculum = Curriculum::findOrFail($id);
 
         $data = $this->getCurriculumData($request);
 
+        // リクエストにthumbnail_imageのファイルがあったとき（ファイルがアップロードされたとき）のみ、サムネイルを更新する
         if ($request->hasFile('thumbnail_image')) {
             $file = $request->file('thumbnail_image');
             if ($file->isValid()) {
+                // この$curriculumが利用するStorageのパス
                 $dir = 'uploads/' . $curriculum->id;
                 $fileName = $file->getClientOriginalName();
+                // ディレクトリを一旦削除してから、そのディレクトリに再度ファイルを配置する
                 Storage::disk('public')->deleteDirectory($dir);
                 Storage::disk('public')->putFileAs($dir, $file, $fileName);
                 $data['thumbnail'] = $fileName;
@@ -77,6 +85,7 @@ class CurriculumController extends Controller
         return redirect()->route('curriculums.list.default');
     }
 
+    // リクエストから、授業のデータを取り出して、連想配列として返す
     private function getCurriculumData(Request $request) {
         return [
             'title' => $request->input('title'),
