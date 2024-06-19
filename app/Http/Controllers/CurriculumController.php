@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CurriculumsRequest;
 use Illuminate\Http\Request;
 use App\Models\Curriculum;
 use App\Models\Grade;
-use App\Http\Requests\CurriculumsRequest;
 use Illuminate\Support\Facades\Storage;
 
 class CurriculumController extends Controller
@@ -37,7 +37,7 @@ class CurriculumController extends Controller
     }
 
     // 授業を作成する
-    public function store(Request $request)
+    public function store(CurriculumsRequest $request)
     {
         if (!$request->hasFile('thumbnail_image')) {
             return '<h1>Thumbnail must be uploaded</h1>';
@@ -57,7 +57,7 @@ class CurriculumController extends Controller
     }
 
     // 授業を更新する
-    public function update(Request $request, $id)
+    public function update(CurriculumsRequest $request, $id)
     {
         $curriculum = Curriculum::findOrFail($id);
 
@@ -86,7 +86,7 @@ class CurriculumController extends Controller
     }
 
     // リクエストから、授業のデータを取り出して、連想配列として返す
-    private function getCurriculumData(Request $request) {
+    private function getCurriculumData(CurriculumsRequest $request) {
         return [
             'title' => $request->input('title'),
             'description' => $request->input('description'),

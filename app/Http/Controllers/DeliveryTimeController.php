@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\DeliveryTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Curriculum;
 
 class DeliveryTimeController extends Controller
@@ -54,6 +52,7 @@ class DeliveryTimeController extends Controller
     }
 
     // リクエストからデータを引き出して、$delivery_timeのdelivery_from、delivery_toをセット
+    // store()、update()で同じロジックを利用するので、この関数に処理を集約する
     private function setDeliveryInfo(Request $request, $delivery_time)
     {
         $delivery_time->setDeliveryFrom($request->input('date_from'), $request->input('time_from'));
