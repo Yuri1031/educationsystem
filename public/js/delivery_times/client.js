@@ -48,15 +48,15 @@ DeliveryTimesClient.prototype.sendRequest = function() {
 
     // 削除を実行
     for (const id of _deleted_ids) {
-        // Promiseを作成して、リクエストの完了を補足する
+        // Promiseを作成して、リクエストの完了を捕捉する
         promises.push(new Promise((resolve, reject) => {
             $.ajax({
-                url: '/api/delivery_times/' + id, // エンドポイントを指定。routes/api.phpを参照。
+                url: '/api/delivery_times/' + id, // APIのエンドポイント。routes/api.phpを参照。
                 type: 'DELETE',
                 data: {
                 },
                 success: function(res) {
-                    resolve(res);
+                    resolve(res);　// Promiseを解決
                 },
                 error: function(xhr) {
                     alert('Delete failed!');
@@ -67,13 +67,14 @@ DeliveryTimesClient.prototype.sendRequest = function() {
 
     // 更新を実行
     for (const data of _update_data) {
+        // Promiseを作成して、リクエストの完了を捕捉する
         promises.push(new Promise((resolve, reject) => {
             $.ajax({
-                url: '/api/delivery_times/' + data['id'], // 適切なエンドポイントに変更
+                url: '/api/delivery_times/' + data['id'], // APIのエンドポイント
                 type: 'PUT',
                 data: data,
                 success: function(res) {
-                    resolve(res);
+                    resolve(res); // Promiseを解決
                 },
                 error: function(xhr) {
                     alert('Update failed!');
@@ -84,13 +85,14 @@ DeliveryTimesClient.prototype.sendRequest = function() {
 
     // 作成を実行
     for (const data of _create_data) {
+        // Promiseを作成して、リクエストの完了を捕捉する
         promises.push(new Promise((resolve, reject) => {
             $.ajax({
-                url: '/api/delivery_times', // 適切なエンドポイントに変更
+                url: '/api/delivery_times', // APIのエンドポイント
                 type: 'POST',
                 data: data,
                 success: function(res) {
-                    resolve(res);
+                    resolve(res);　// Promiseを解決
                 },
                 error: function(xhr) {
                     // alert('Create failed!');

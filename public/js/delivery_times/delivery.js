@@ -19,7 +19,7 @@ const _getValue = (index, name) => {
  * indexを用いて、inputのグループを管理する
  */
 export default function InputFieldsManager(target_selector, delivery_time_client) {
-    // <input>のグループを挿入すべき、要素のセレクタ
+    // <input>のグループを挿入すべき要素のセレクタ
     _target_selector = target_selector;
     // DeliveryTimeClient(public/js/delivery_times/client.js)と組み合わせて利用する
     _client = delivery_time_client;
@@ -30,7 +30,7 @@ export default function InputFieldsManager(target_selector, delivery_time_client
     _client.beforeRequest = function () {
         // indexごとに<input>グループが紐付いている。indexごとの<input>グループを調べて、前処理を行う
         for (let i = 0; i < _index; i++) {
-            // _removed_indicesに含まれるindexと、紐付いた<input>グループはすでに削除されているので、スキップする。
+            // _removed_indicesに含まれるindexと紐付いた<input>グループは、すでに削除されているので、スキップする。
             if (_removed_indices.includes(i)) {
                 continue;
             }
