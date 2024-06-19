@@ -5,6 +5,7 @@ namespace App\Models;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class DeliveryTime extends Model
 {
@@ -46,6 +47,21 @@ class DeliveryTime extends Model
     public function getDeliveryTimeTo()
     {
         return $this->delivery_to->format(self::TIME_FORMAT);
+    }
+
+    public function setDeliveryFrom($date, $time)
+    {
+        $this->delivery_from = self::createDatetime($date, $time);
+    }
+
+    public function setDeliveryTo($date, $time)
+    {
+        $this->delivery_to = self::createDatetime($date, $time);
+    }
+
+    private static function createDatetime($date, $time)
+    {
+        return Carbon::createFromFormat(self::DATE_FORMAT . self::TIME_FORMAT, $date . $time);
     }
 
     public static function findByCurriculumId($id)

@@ -12,7 +12,7 @@
     {{-- CDNでFontAwesomeのアイコンを読み込む --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <script src="{{ asset('js/delivery_times/delivery.js') }}"></script>
+{{--    <script src="{{ asset('js/delivery_times/delivery.js') }}"></script>--}}
     <title>配信日時設定</title>
 </head>
 <body>
@@ -20,7 +20,6 @@
     <div class="wrapper">
 
         <div class="header">
-            <!-- 戻るボタンを押すと管理-授業一覧へ戻る形にしたい -->
             <a class="header__back" href="{{ route('curriculums.list.default') }}">←戻る</a>
             <h1 class="header__title">配信日時設定</h1>
         </div>
@@ -43,22 +42,41 @@
         </div>
     </div>
 </body>
-<script>
+<script type="module">
+    import InputFieldsManager from "{{ asset('js/delivery_times/delivery.js') }}";
+    import DeliveryTimesClient from "{{ asset('js/delivery_times/client.js') }}";
+
+    // clientがリクエストを送信する
+    const client = new DeliveryTimesClient({{ $curriculum->id }});
+    // managerが<input>グループの追加と、clientへの値の受け渡しを行う
+    const manager = new InputFieldsManager('.delivery-time-form__fields-wrapper', client);
+
+    // 初めにdelivery_timesの分だけ、<input>グループを追加して、初期値をあてはめる。
     @if (count($delivery_times) > 0)
         @foreach ($delivery_times as $delivery_time)
-        appendFields(
-        '.delivery-time-form__fields-wrapper',
+        manager.appendFields(
+        "{{ $delivery_time->id }}",
         "{{ $delivery_time->getDeliveryDateFrom() }}",
         "{{ $delivery_time->getDeliveryTimeFrom() }}",
         "{{ $delivery_time->getDeliveryDateTo() }}",
-        "{{ $delivery_time->getDeliveryTimeTo() }}")
+        "{{ $delivery_time->getDeliveryTimeTo() }}");
         @endforeach
-    @else
-        appendFields('.delivery-time-form__fields-wrapper');
+    @else // この$curriculumに一つもDeliveryTimeが紐付いていない場合は、空の<input>グループを一つ用意する。
+        manager.appendFields();
     @endif
 
+        // 追加ボタンを押すと<input>のグループを追加する
     $('.delivery-time-form__add-btn').click((e) => {
-        appendFields('.delivery-time-form__fields-wrapper');
+        manager.appendFields();
+    });
+
+    //  登録ボタンを押すと、clientにリクエストを送信させる
+    $('.delivery-time-form__register-btn').click((e) => {
+        e.preventDefault();
+        client.sendRequest().then((results) => {
+            // リクエストが完了したら、授業一覧画面へリダイレクト
+            window.location.href = '{{ route('curriculums.list.default') }}';
+        });
     });
 </script>
 </html>

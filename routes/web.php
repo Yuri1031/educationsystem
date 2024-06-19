@@ -40,7 +40,7 @@ Route::prefix('curriculums')->group(function () {
 
 Route::prefix('delivery_times')->group(function () {
     // 配信日時設定画面へルーティング
-    Route::get('/edit/{curriculum_id}', [DeliveryTimeController::class, 'edit'])->name('delivery_times.edit');
+    Route::get('/edit/{curriculums_id}', [DeliveryTimeController::class, 'edit'])->name('delivery_times.edit');
 });
 
 
