@@ -19,7 +19,7 @@
     <div class="wrapper">
 
         <div class="header">
-            <a class="header__back" href="{{ route('curriculums.list.default') }}">←戻る</a>
+            <a class="header__back" href="{{ route('curriculums.list', $curriculum->grade_id) }}">←戻る</a>
             <h1 class="header__title">配信日時設定</h1>
         </div>
 
@@ -81,7 +81,7 @@
         e.preventDefault();
         client.sendRequest().then((results) => {
             // リクエストが完了したら、授業一覧画面へリダイレクト
-            window.location.href = '{{ route('curriculums.list.default') }}';
+            window.location.href = '{{ route('curriculums.list', $curriculum->grade_id) }}';
         });
     });
 </script>
