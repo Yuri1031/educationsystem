@@ -43,8 +43,15 @@ export default function InputFieldsManager(target_selector, delivery_time_client
 
             const delivery_time_id = _indices_to_delivery_time_id[i];
             if (delivery_time_id) { // _indices_to_delivery_time_idにindexと紐付いたidがある場合は、このindexと紐付いた<input>グループは、DeliveryTimeの更新に使われるとみなす。
-                _client.update(delivery_time_id, date_from, time_from, date_to, time_to);
+                if (date_from === '' && time_from === '' && time_to === '' && date_to === '') { // 入力が何もないときは、既存の配信日時を削除したとみなす
+                    _client.delete(delivery_time_id);
+                } else {
+                    _client.update(delivery_time_id, date_from, time_from, date_to, time_to);
+                }
             } else { // _indices_to_delivery_time_idにindexと紐付いたidがない場合は、DeliveryTimeの作成に利用されるとみなす。
+                if (date_from === '' && time_from === '' && time_to === '' && date_to === '') { // 入力が何もないときは、何もしない
+                    continue;
+                }
                 _client.create(date_from, time_from, date_to, time_to);
             }
         }
