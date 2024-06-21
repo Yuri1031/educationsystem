@@ -59,6 +59,7 @@ DeliveryTimesClient.prototype.sendRequest = function() {
                     resolve(res);　// Promiseを解決
                 },
                 error: function(xhr) {
+                    reject(xhr.responseJSON);
                 }
             })
         }));
@@ -76,6 +77,7 @@ DeliveryTimesClient.prototype.sendRequest = function() {
                     resolve(res); // Promiseを解決
                 },
                 error: function(xhr) {
+                    reject(xhr.responseJSON);
                 }
             })
         }));
@@ -93,11 +95,12 @@ DeliveryTimesClient.prototype.sendRequest = function() {
                     resolve(res);　// Promiseを解決
                 },
                 error: function(xhr) {
+                    reject(xhr.responseJSON);
                 }
             })
         }));
     }
 
     // Promise.allは、全てのリクエストが完了したとき（promisesないの全てのPromiseが解決されたとき）に解決される。
-    return Promise.all([promises])
+    return Promise.all(promises);
 }

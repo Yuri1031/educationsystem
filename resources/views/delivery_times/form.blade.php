@@ -46,6 +46,11 @@
                 <button type="submit" class="delivery-time-form__register-btn form__register-btn bg-btn-secondary">登録</button>
             </form>
         </div>
+
+        <div class="error">
+            <div id="error-message"></div>
+            <div id="error-stacktrace"></div>
+        </div>
     </div>
 </body>
 <script type="module">
@@ -79,10 +84,16 @@
     //  登録ボタンを押すと、clientにリクエストを送信させる
     $('.delivery-time-form__register-btn').click((e) => {
         e.preventDefault();
-        client.sendRequest().then((results) => {
-            // リクエストが完了したら、授業一覧画面へリダイレクト
-            window.location.href = '{{ route('curriculums.list', $curriculum->grade_id) }}';
-        });
+        client.sendRequest()
+            .then((results) => {
+                // リクエストが完了したら、授業一覧画面へリダイレクト
+                window.location.href = '{{ route('curriculums.list', $curriculum->grade_id) }}';
+            })
+            .catch((error) => {
+                console.log(error);
+                $('#error-message').html(error['message']);
+                $('#error-stacktrace').html(error['stacktrace'])
+            });
     });
 </script>
 </html>
