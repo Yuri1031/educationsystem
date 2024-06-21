@@ -1,4 +1,7 @@
 // このファイル内でしかアクセスできない変数。DeliveryTimesClientのプライベート変数のように扱う
+let _create_url;
+let _base_update_url;
+let _base_delete_url;
 const _deleted_ids = [];
 const _update_data = [];
 const _create_data = [];
@@ -9,9 +12,12 @@ let _curriculums_id;
  * Laravelで設定されたAPIを呼び出して、DeliveryTimeの作成、編集、削除を行うプロトタイプ。
  * delete、update、createでリクエストのデータを蓄積し、sendRequest()で一斉にリクエストを送信する
  */
-export default function DeliveryTimesClient(target_curriculums_id) {
+export default function DeliveryTimesClient({target_curriculums_id, create_url, base_update_url, base_delete_url}) {
     // 対象のCurriculumのid
     _curriculums_id = target_curriculums_id;
+    _create_url = create_url;
+    _base_update_url = base_update_url;
+    _base_delete_url = base_delete_url;
 }
 
 // sendRequest()の前に実行されるコールバック。デフォルトでは何も実行しない。
@@ -46,12 +52,17 @@ DeliveryTimesClient.prototype.sendRequest = function() {
     //　全てのリクエストの完了を待つために、Promiseを格納する
     const promises = [];
 
+    console.log('create: ' + _create_url);
+    console.log('update: ' + _base_update_url);
+    console.log('delete: ' + _base_delete_url);
+
     // 削除を実行
     for (const id of _deleted_ids) {
+        const url = _base_delete_url.replace(':id', `${id}`)
         // Promiseを作成して、リクエストの完了を捕捉する
         promises.push(new Promise((resolve, reject) => {
             $.ajax({
-                url: '/api/delivery_times/' + id, // APIのエンドポイント。routes/api.phpを参照。
+                url: url, // APIのエンドポイント。routes/api.phpを参照。
                 type: 'DELETE',
                 data: {
                 },
@@ -67,10 +78,11 @@ DeliveryTimesClient.prototype.sendRequest = function() {
 
     // 更新を実行
     for (const data of _update_data) {
+        const url = _base_update_url.replace(':id', `${data['id']}`);
         // Promiseを作成して、リクエストの完了を捕捉する
         promises.push(new Promise((resolve, reject) => {
             $.ajax({
-                url: '/api/delivery_times/' + data['id'], // APIのエンドポイント
+                url: url, // APIのエンドポイント
                 type: 'PUT',
                 data: data,
                 success: function(res) {
@@ -88,7 +100,7 @@ DeliveryTimesClient.prototype.sendRequest = function() {
         // Promiseを作成して、リクエストの完了を捕捉する
         promises.push(new Promise((resolve, reject) => {
             $.ajax({
-                url: '/api/delivery_times', // APIのエンドポイント
+                url: _create_url, // APIのエンドポイント
                 type: 'POST',
                 data: data,
                 success: function(res) {

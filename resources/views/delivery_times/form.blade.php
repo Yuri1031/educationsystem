@@ -58,7 +58,12 @@
     import DeliveryTimesClient from "{{ asset('js/delivery_times/client.js') }}";
 
     // リクエストを送信するクライアントを作成
-    const client = new DeliveryTimesClient({{ $curriculum->id }});
+    const client = new DeliveryTimesClient({
+        target_curriculums_id: {{ $curriculum->id }},
+        create_url: '{{ route("delivery_times.store") }}',
+        base_update_url: '{{ route("delivery_times.update", ":id") }}',
+        base_delete_url: '{{ route("delivery_times.destroy", ":id") }}',
+    });
     // managerが<input>グループの追加と、clientへの値の受け渡しを行う
     const manager = new InputFieldsManager('.delivery-time-form__fields-wrapper', client);
 
