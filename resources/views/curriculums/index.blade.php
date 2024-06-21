@@ -74,7 +74,7 @@
                                         <span>常時公開</span>
                                     @else {{-- 常時公開ではない場合は、登録された配信日時を表示 --}}
                                         @php
-                                            $delivery_times = $curriculum->getDeliveryTimes();
+                                            $delivery_times = $curriculum->getDeliveryTimesAscByDeliveryFrom();
                                             $max_display = 4; // 表示する配信日時の上限は4とする（任意）
                                         @endphp
                                         @for ($i = 0; $i < $max_display; $i++) {{-- 上限に達するまで、配信日時を表示していく --}}

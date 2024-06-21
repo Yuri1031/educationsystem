@@ -13,7 +13,7 @@ class DeliveryTimeController extends Controller
     public function edit($curriculums_id)
     {
         $curriculum = Curriculum::find($curriculums_id);
-        $delivery_times = $curriculum->getDeliveryTimes();
+        $delivery_times = $curriculum->getDeliveryTimesAscByDeliveryFrom();
         return view('delivery_times.form', compact('curriculum', 'delivery_times'));
     }
 

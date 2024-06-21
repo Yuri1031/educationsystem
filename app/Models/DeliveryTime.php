@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use DateTime;
+use http\Exception\InvalidArgumentException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DeliveryTime extends Model
 {
@@ -74,9 +76,17 @@ class DeliveryTime extends Model
     }
 
     // あるcurriculums_idを持つDeliveryTimeを全て取得する
-    public static function findByCurriculumId($id)
+    public static function findByCurriculumId($id, $ordered = false, $by = 'delivery_from',  $asc = true)
     {
-        return self::where('curriculums_id', $id)->get();
+        $builder = self::where('curriculums_id', $id);
+        if ($ordered) {
+            if (!($by == 'delivery_from' || $by == 'delivery_to')) {
+                throw new InvalidArgumentException("Argument $by must be 'delivery_from' or 'delivery_to'");
+            }
+            $asc_or_desc = $asc ? 'asc' : 'desc';
+            $builder->orderBy($by, $asc_or_desc);
+        }
+        return $builder->get();
     }
 
 }

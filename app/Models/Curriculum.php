@@ -30,9 +30,9 @@ class Curriculum extends Model
     }
 
     // この授業の全ての配信日時を取得する
-    public function getDeliveryTimes()
+    public function getDeliveryTimesAscByDeliveryFrom($asc = true)
     {
-        return DeliveryTime::findByCurriculumId($this->id);
+        return DeliveryTime::findByCurriculumId($this->id, true);
     }
 
     // この授業のサムネイル画像のURLを取得する
