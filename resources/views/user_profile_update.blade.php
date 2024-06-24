@@ -30,7 +30,7 @@
           </dl>
           <dl>
             <dd>ユーザーネーム</dd>
-            <dt><input type="text" name="user_name"></dt>
+            <dt><input type="text" name="user_name" value="{{ $user->name }}"></dt>
             <div class="errorBox">
               @error('user_name')
                 <span class="errorText">{{ $message }}</span>
@@ -39,7 +39,7 @@
           </dl>
           <dl>
             <dd>ユーザーネーム（カナ）</dd>
-            <dt><input type="text" name="user_name_kana"></dt>
+            <dt><input type="text" name="user_name_kana" value="{{ $user->name_kana }}"></dt>
             <div class="errorBox">
               @error('user_name_kana')
                 <span class="errorText">{{ $message }}</span>
@@ -48,7 +48,7 @@
           </dl>
           <dl>
             <dd>メールアドレス</dd>
-            <dt><input type="text" name="email"></dt>
+            <dt><input type="text" name="email" value="{{ $user->email }}"></dt>
             <div class="errorBox">
               @error('email')
                 <span class="errorText">{{ $message }}</span>
