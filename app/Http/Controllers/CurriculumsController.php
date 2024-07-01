@@ -86,14 +86,16 @@ class CurriculumsController extends Controller
         $curriculum->enrolled = $this->isEnrolled($curriculum, Auth::user());
 
         \Log::info($curriculum); // デバッグ用にログ出力
-        return view('curriculums', compact('curriculum')); // ビューにデータを渡す
+        $curriculums = collect([$curriculum]);
+        return view('curriculums', compact('curriculums')); // ビューにデータを渡す
+
     }
 
 
     public function enroll(Request $request)
     {
         // ユーザーの授業をクリア登録する処理
-        $curriculum = Curriculum::findOrFail($request->courseId);
+        $curriculum = Curriculums::findOrFail($request->courseId);
         $curriculum->enrolled = true;
         $curriculum->save();
 
