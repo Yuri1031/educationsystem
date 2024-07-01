@@ -14,7 +14,7 @@
         <div class="content">
           <!--動画-->
           <div class="thumbnail">
-            <a href="{{ $curriculum->video_url }}">
+            <a href="{{ asset('storage/' . $curriculum->video_url) }}">
               <img src="{{ asset('storage/' . $curriculum->thumbnail) }}" alt="thumbnail" class="thumbnail-img">
             </a>
             @if($curriculum->is_in_delivery_period)
