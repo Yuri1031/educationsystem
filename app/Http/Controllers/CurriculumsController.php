@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Curriculums;
+use App\Models\DeliveryTimes;
 use App\Models\Grades;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,17 +15,23 @@ class CurriculumsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
+    
+    
+    
     public function index()
     {
-        $curriculums = Curriculums::all(); // カリキュラムテーブルの全てを取得    
-        $grades = Grades::all();   
+        $curriculums = Curriculums::with('delivery_times')->get(); // カリキュラムテーブルの全てを取得    
         $user = Auth::user();
-        // 各カリキュラムに対して「配信期間内かどうか」「クリア済みかどうか」の判定をする
+        
         foreach ($curriculums as $curriculum) {
             $curriculum->is_in_delivery_period = $this->isInDeliveryPeriod($curriculum);
             $curriculum->enrolled = $this->isEnrolled($curriculum, $user);
         }        
+        
         return view('curriculums', compact('curriculums'));
+
     }
 
 
@@ -35,10 +42,13 @@ class CurriculumsController extends Controller
             return true;
         }
 
-        if ($curriculum->delivery_flg) {
-            $now = Carbon::now();
-            return $now->between($curriculum->delivery_start_date, $curriculum->delivery_end_date);
+        $deliveryTimes = $curriculum->delivery_times;
+
+        if ($curriculum->delivery_flg && $deliveryTimes) {
+            $now = now();
+            return $now->between($deliveryTimes->delivery_from, $deliveryTimes->delivery_to);
         }
+
         return false;
     }
 
@@ -81,7 +91,7 @@ class CurriculumsController extends Controller
      */
     public function show($id)
     {
-        $curriculum = Curriculums::findOrFail($id);
+        $curriculum = Curriculums::with('delivery_times')->findOrFail($id);
         $curriculum->is_in_delivery_period = $this->isInDeliveryPeriod($curriculum);
         $curriculum->enrolled = $this->isEnrolled($curriculum, Auth::user());
 
@@ -101,6 +111,7 @@ class CurriculumsController extends Controller
 
         // 成功時のレスポンスを返す
         return response()->json(['message' => 'Enrolled successfully'], 200);
+        
     }
 
     /**

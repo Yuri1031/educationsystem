@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\DeliveryTimes;
 
 class Curriculums extends Model
 {
@@ -17,5 +18,11 @@ class Curriculums extends Model
         return $this->belongsTo(Grade::class, 'grade_id');
     }
 
+    public function delivery_times()
+    {
+        return $this->hasOne(DeliveryTimes::class, 'curriculum_id');
+    }
+
 
 }
+
